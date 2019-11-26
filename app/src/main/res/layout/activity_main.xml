@@ -2,17 +2,134 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_constraint_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#35654D"
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/communityCardTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="16dp"
+        android:text="@string/community_cards"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/communityImage1"
+        android:layout_width="55dp"
+        android:layout_height="60dp"
+        android:contentDescription="@string/no_card"
+        app:layout_constraintEnd_toStartOf="@+id/communityImage2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/communityImage3"
+        app:layout_constraintVertical_weight="1"
+        app:srcCompat="@drawable/card_back" />
+
+    <ImageView
+        android:id="@+id/communityImage2"
+        android:layout_width="55dp"
+        android:layout_height="60dp"
+        android:contentDescription="@string/no_card"
+        app:layout_constraintEnd_toStartOf="@+id/communityImage3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/communityImage1"
+        app:layout_constraintTop_toTopOf="@+id/communityImage3"
+        app:layout_constraintVertical_weight="1"
+        app:srcCompat="@drawable/card_back" />
+
+    <ImageView
+        android:id="@+id/communityImage3"
+        android:layout_width="55dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="32dp"
+        android:contentDescription="@string/no_card"
+        app:layout_constraintEnd_toStartOf="@+id/communityImage4"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/communityImage2"
+        app:layout_constraintTop_toBottomOf="@+id/communityCardTextView"
+        app:layout_constraintVertical_weight="1"
+        app:srcCompat="@drawable/card_back" />
+
+    <ImageView
+        android:id="@+id/communityImage5"
+        android:layout_width="55dp"
+        android:layout_height="60dp"
+        android:contentDescription="@string/no_card"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/communityImage4"
+        app:layout_constraintTop_toTopOf="@+id/communityImage3"
+        app:layout_constraintVertical_weight="1"
+        app:srcCompat="@drawable/card_back" />
+
+    <ImageView
+        android:id="@+id/communityImage4"
+        android:layout_width="55dp"
+        android:layout_height="60dp"
+        android:contentDescription="@string/no_card"
+        app:layout_constraintEnd_toStartOf="@+id/communityImage5"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/communityImage3"
+        app:layout_constraintTop_toTopOf="@+id/communityImage3"
+        app:layout_constraintVertical_weight="1"
+        app:srcCompat="@drawable/card_back" />
+
+    <Button
+        android:id="@+id/addPlayerButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/add_a_player"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/communityImage3" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#A5E5FF"
+        android:gravity="center_horizontal|fill_horizontal"
+        android:orientation="horizontal"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/clearCardsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/clear_all_cards" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/findWinnerButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/find_winner" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
