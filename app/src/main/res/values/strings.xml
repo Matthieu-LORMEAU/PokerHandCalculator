@@ -5,4 +5,6 @@
     <string name="find_winner">Find Winner</string>
     <string name="clear_all_cards">Clear All Cards</string>
     <string name="no_card">No Card</string>
+    <string name="new_round">New Round</string>
+    <string name="ranking">Ranking</string>
 </resources>
