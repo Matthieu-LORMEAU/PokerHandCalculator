@@ -11,36 +11,40 @@
 
     <TextView
         android:id="@+id/playerNameTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_width="51dp"
+        android:layout_height="21dp"
+        android:layout_marginTop="4dp"
         android:text="Player's name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintEnd_toStartOf="@+id/removePlayerButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/card2ImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <LinearLayout
+        android:id="@+id/playerHandLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginTop="16dp"
+        android:gravity="center|center_horizontal|center_vertical"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/card1ImageView"
-        app:layout_constraintTop_toBottomOf="@+id/playerNameTextView"
-        app:srcCompat="@drawable/card_back" />
-
-    <ImageView
-        android:id="@+id/card1ImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toStartOf="@+id/card2ImageView"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/card2ImageView"
-        app:srcCompat="@drawable/card_back" />
+        app:layout_constraintTop_toBottomOf="@+id/playerNameTextView">
+
+        <ImageView
+            android:id="@+id/card1ImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/card_back" />
+
+        <ImageView
+            android:id="@+id/card2ImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/card_back" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/foldButton"
@@ -51,6 +55,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/card1ImageView" />
+        app:layout_constraintTop_toBottomOf="@+id/playerHandLinearLayout" />
+
+    <Button
+        android:id="@+id/removePlayerButton"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:text="x"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

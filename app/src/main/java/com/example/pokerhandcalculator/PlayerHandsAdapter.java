@@ -1,18 +1,18 @@
 package com.example.pokerhandcalculator;
 
 import android.content.Context;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.Space;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class PlayerHandsAdapter extends ArrayAdapter<PlayerHand> {
     // declaring our ArrayList of items
@@ -60,13 +60,43 @@ public class PlayerHandsAdapter extends ArrayAdapter<PlayerHand> {
             playerName.setText(Integer.toString(playerHand.getId()));
             ImageView iv1 = (ImageView) v.findViewById(R.id.card1ImageView);
             ImageView iv2 = (ImageView) v.findViewById(R.id.card2ImageView);
-            Button foldButton = (Button) v.findViewById(R.id.foldButton);
-            foldButton.setOnClickListener(new View.OnClickListener() {
+            final LinearLayout playerHandLinearLayout = v.findViewById(R.id.playerHandLinearLayout);
+            Button removePlayerButton = (Button) v.findViewById(R.id.removePlayerButton);
+            removePlayerButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     remove(playerHand);
                     notifyDataSetChanged();
-                    System.out.println(playerHands.toString());
+                }
+            });
+            final Button foldButton = (Button) v.findViewById(R.id.foldButton);
+            foldButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    playerHandLinearLayout.removeAllViews();
+                    System.out.println(foldButton.getText());
+                    if(foldButton.getText().equals("Fold")){
+                        TextView foldedTextView = new TextView(view.getContext());
+                        playerHandLinearLayout.addView(foldedTextView);
+                        foldedTextView.requestLayout();
+                        foldedTextView.setText("FOLDED");
+                        foldButton.setText("UNFOLD");
+                    }else{
+                        ImageView card1IV = new ImageView(view.getContext());
+                        card1IV.setImageResource(R.drawable.card_back);
+                        ImageView card2IV = new ImageView(view.getContext());
+                        card2IV.setImageResource(R.drawable.card_back);
+                        LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.MATCH_PARENT,
+                                LinearLayout.LayoutParams.MATCH_PARENT,
+                                1.0f
+                        );
+                        card1IV.setLayoutParams(param);
+                        card2IV.setLayoutParams(param);
+                        playerHandLinearLayout.addView(card1IV);
+                        playerHandLinearLayout.addView(card2IV);
+                        foldButton.setText("Fold");
+                    }
                 }
             });
 //            TextView mt = (TextView) v.findViewById(R.id.middletext);

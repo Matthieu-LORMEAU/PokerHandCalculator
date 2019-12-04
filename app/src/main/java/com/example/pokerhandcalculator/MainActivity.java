@@ -25,10 +25,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void setHandsAdapter(){
+
         final GridView phgv = findViewById(R.id.playerHandsGridView);
         ViewCompat.setNestedScrollingEnabled(phgv,true);
+
         adapter = new PlayerHandsAdapter(this, R.layout.player_hand_item, playerHands);
         phgv.setAdapter(adapter);
+
         Button addPlayer = findViewById(R.id.addPlayerButton);
         addPlayer.setOnClickListener(new View.OnClickListener() {
             @Override
