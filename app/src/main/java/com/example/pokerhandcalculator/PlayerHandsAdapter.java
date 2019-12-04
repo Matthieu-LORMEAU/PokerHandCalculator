@@ -5,9 +5,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class PlayerHandsAdapter extends ArrayAdapter<PlayerHand> {
     // declaring our ArrayList of items
@@ -26,7 +31,7 @@ public class PlayerHandsAdapter extends ArrayAdapter<PlayerHand> {
      * we are overriding the getView method here - this is what defines how each
      * list item will look.
      */
-    public View getView(int position, View convertView, ViewGroup parent){
+    public View getView(final int position, View convertView, ViewGroup parent){
 
         // assign the view we are converting to a local variable
         View v = convertView;
@@ -45,15 +50,25 @@ public class PlayerHandsAdapter extends ArrayAdapter<PlayerHand> {
          *
          * Therefore, i refers to the current Item object.
          */
-        PlayerHand i = playerHands.get(position);
+        final PlayerHand playerHand = getItem(position);
 
-        if (i != null) {
+        if (playerHand != null) {
 
             // This is how you obtain a reference to the TextViews.
             // These TextViews are created in the XML files we defined.
-
+            TextView playerName = v.findViewById(R.id.playerNameTextView);
+            playerName.setText(Integer.toString(playerHand.getId()));
             ImageView iv1 = (ImageView) v.findViewById(R.id.card1ImageView);
             ImageView iv2 = (ImageView) v.findViewById(R.id.card2ImageView);
+            Button foldButton = (Button) v.findViewById(R.id.foldButton);
+            foldButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    remove(playerHand);
+                    notifyDataSetChanged();
+                    System.out.println(playerHands.toString());
+                }
+            });
 //            TextView mt = (TextView) v.findViewById(R.id.middletext);
 //            TextView mtd = (TextView) v.findViewById(R.id.middletextdata);
 //            TextView bt = (TextView) v.findViewById(R.id.bottomtext);
