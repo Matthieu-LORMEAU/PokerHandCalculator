@@ -5,7 +5,6 @@ import androidx.core.view.ViewCompat;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 
@@ -13,7 +12,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    ArrayList<PlayerHand> playerHands = new ArrayList<PlayerHand>();
+    ArrayList<Player> players = new ArrayList<Player>();
     PlayerHandsAdapter adapter;
     int countPlayerHands = 0;
 
@@ -28,17 +27,16 @@ public class MainActivity extends AppCompatActivity {
 
         final GridView phgv = findViewById(R.id.playerHandsGridView);
         ViewCompat.setNestedScrollingEnabled(phgv,true);
-
-        adapter = new PlayerHandsAdapter(this, R.layout.player_hand_item, playerHands);
+        adapter = new PlayerHandsAdapter(this, R.layout.player_hand_item, players);
         phgv.setAdapter(adapter);
 
         Button addPlayer = findViewById(R.id.addPlayerButton);
         addPlayer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                playerHands.add(new PlayerHand(countPlayerHands++));
+                players.add(new Player(countPlayerHands++));
                 adapter.notifyDataSetChanged();
-                phgv.smoothScrollToPosition(playerHands.size()-1);
+                phgv.smoothScrollToPosition(players.size()-1);
             }
         });
     }

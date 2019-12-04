@@ -14,17 +14,17 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class PlayerHandsAdapter extends ArrayAdapter<PlayerHand> {
+public class PlayerHandsAdapter extends ArrayAdapter<Player> {
     // declaring our ArrayList of items
-    private ArrayList<PlayerHand> playerHands;
+    private ArrayList<Player> players;
 
     /* here we must override the constructor for ArrayAdapter
      * the only variable we care about now is ArrayList<Item> objects,
      * because it is the list of objects we want to display.
      */
-    public PlayerHandsAdapter(Context context, int textViewResourceId, ArrayList<PlayerHand> playerHands) {
-        super(context, textViewResourceId, playerHands);
-        this.playerHands = playerHands;
+    public PlayerHandsAdapter(Context context, int textViewResourceId, ArrayList<Player> players) {
+        super(context, textViewResourceId, players);
+        this.players = players;
     }
 
     /*
@@ -50,14 +50,14 @@ public class PlayerHandsAdapter extends ArrayAdapter<PlayerHand> {
          *
          * Therefore, i refers to the current Item object.
          */
-        final PlayerHand playerHand = getItem(position);
+        final Player player = getItem(position);
 
-        if (playerHand != null) {
+        if (player != null) {
 
             // This is how you obtain a reference to the TextViews.
             // These TextViews are created in the XML files we defined.
             TextView playerName = v.findViewById(R.id.playerNameTextView);
-            playerName.setText(Integer.toString(playerHand.getId()));
+            playerName.setText(Integer.toString(player.getId()));
             ImageView iv1 = (ImageView) v.findViewById(R.id.card1ImageView);
             ImageView iv2 = (ImageView) v.findViewById(R.id.card2ImageView);
             final LinearLayout playerHandLinearLayout = v.findViewById(R.id.playerHandLinearLayout);
@@ -65,7 +65,7 @@ public class PlayerHandsAdapter extends ArrayAdapter<PlayerHand> {
             removePlayerButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    remove(playerHand);
+                    remove(player);
                     notifyDataSetChanged();
                 }
             });
