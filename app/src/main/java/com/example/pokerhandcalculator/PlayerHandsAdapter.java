@@ -1,16 +1,24 @@
 package com.example.pokerhandcalculator;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.text.InputType;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Space;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
 
 import java.util.ArrayList;
 
@@ -31,7 +39,7 @@ public class PlayerHandsAdapter extends ArrayAdapter<Player> {
      * we are overriding the getView method here - this is what defines how each
      * list item will look.
      */
-    public View getView(final int position, View convertView, ViewGroup parent){
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         // assign the view we are converting to a local variable
         View v = convertView;
@@ -57,10 +65,37 @@ public class PlayerHandsAdapter extends ArrayAdapter<Player> {
             // This is how you obtain a reference to the TextViews.
             // These TextViews are created in the XML files we defined.
             TextView playerName = v.findViewById(R.id.playerNameTextView);
-            playerName.setText(Integer.toString(player.getId()));
+            playerName.setText(player.getName().trim());
+
             ImageView iv1 = (ImageView) v.findViewById(R.id.card1ImageView);
+            iv1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                    AlertDialog alertToShow = builder.create();
+                    alertToShow.setTitle("Player name");
+                    LayoutInflater inflater = ;
+                    View dialogView = inflater.inflate(R.layout.alert_label_editor, null);
+                    dialogBuilder.setView(dialogView);
+
+                    // Set up the buttons
+                    alertToShow.setButton(Dialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+                    alertToShow.setButton(Dialog.BUTTON_NEGATIVE, "CANCEL", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+                    alertToShow.show();
+                }
+            });
             ImageView iv2 = (ImageView) v.findViewById(R.id.card2ImageView);
-            final LinearLayout playerHandLinearLayout = v.findViewById(R.id.playerHandLinearLayout);
+
             Button removePlayerButton = (Button) v.findViewById(R.id.removePlayerButton);
             removePlayerButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -69,19 +104,21 @@ public class PlayerHandsAdapter extends ArrayAdapter<Player> {
                     notifyDataSetChanged();
                 }
             });
+
+            final LinearLayout playerHandLinearLayout = v.findViewById(R.id.playerHandLinearLayout);
             final Button foldButton = (Button) v.findViewById(R.id.foldButton);
             foldButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     playerHandLinearLayout.removeAllViews();
                     System.out.println(foldButton.getText());
-                    if(foldButton.getText().equals("Fold")){
+                    if (foldButton.getText().equals("Fold")) {
                         TextView foldedTextView = new TextView(view.getContext());
                         playerHandLinearLayout.addView(foldedTextView);
                         foldedTextView.requestLayout();
                         foldedTextView.setText("FOLDED");
                         foldButton.setText("UNFOLD");
-                    }else{
+                    } else {
                         ImageView card1IV = new ImageView(view.getContext());
                         card1IV.setImageResource(R.drawable.card_back);
                         ImageView card2IV = new ImageView(view.getContext());

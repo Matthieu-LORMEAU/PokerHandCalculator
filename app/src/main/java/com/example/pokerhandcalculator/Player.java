@@ -4,12 +4,13 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 
 public class Player {
-    private int id ;
+    private int id;
     private String name;
     Card[] cards = new Card[2];
 
-    public Player(int id){
+    public Player(int id, String name) {
         this.id = id;
+        this.name = name;
     }
 
     public int getId() {
@@ -20,7 +21,7 @@ public class Player {
         this.name = name;
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
