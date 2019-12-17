@@ -67,34 +67,34 @@ public class PlayerHandsAdapter extends ArrayAdapter<Player> {
             TextView playerName = v.findViewById(R.id.playerNameTextView);
             playerName.setText(player.getName().trim());
 
-            ImageView iv1 = (ImageView) v.findViewById(R.id.card1ImageView);
-            iv1.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-                    AlertDialog alertToShow = builder.create();
-                    alertToShow.setTitle("Player name");
-                    LayoutInflater inflater = ;
-                    View dialogView = inflater.inflate(R.layout.alert_label_editor, null);
-                    dialogBuilder.setView(dialogView);
-
-                    // Set up the buttons
-                    alertToShow.setButton(Dialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-
-                        }
-                    });
-                    alertToShow.setButton(Dialog.BUTTON_NEGATIVE, "CANCEL", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.cancel();
-                        }
-                    });
-                    alertToShow.show();
-                }
-            });
-            ImageView iv2 = (ImageView) v.findViewById(R.id.card2ImageView);
+//            ImageView iv1 = (ImageView) v.findViewById(R.id.card1ImageView);
+//            iv1.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+//                    AlertDialog alertToShow = builder.create();
+//                    alertToShow.setTitle("Player name");
+//                    LayoutInflater inflater = ;
+//                    View dialogView = inflater.inflate(R.layout.alert_label_editor, null);
+//                    dialogBuilder.setView(dialogView);
+//
+//                    // Set up the buttons
+//                    alertToShow.setButton(Dialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//
+//                        }
+//                    });
+//                    alertToShow.setButton(Dialog.BUTTON_NEGATIVE, "CANCEL", new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            dialog.cancel();
+//                        }
+//                    });
+//                    alertToShow.show();
+//                }
+//            });
+//            ImageView iv2 = (ImageView) v.findViewById(R.id.card2ImageView);
 
             Button removePlayerButton = (Button) v.findViewById(R.id.removePlayerButton);
             removePlayerButton.setOnClickListener(new View.OnClickListener() {
