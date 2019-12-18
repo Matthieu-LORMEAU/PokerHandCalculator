@@ -6,7 +6,8 @@ import android.widget.LinearLayout;
 public class Player {
     private int id;
     private String name;
-    Card[] cards = new Card[2];
+    private Card[] cards = new Card[2];
+    boolean folded = false;
 
     public Player(int id, String name) {
         this.id = id;
@@ -31,5 +32,27 @@ public class Player {
 
     public void setSecondCard(Card card) {
         this.cards[1] = card;
+    }
+
+    public Card[] getCards() {
+        return cards;
+    }
+
+    public String getCardsAsString() throws NullCardException {
+        if (cards[0] == null || cards[1] == null)
+            throw new NullCardException();
+        return cards[0].toString() + cards[1].toString();
+    }
+
+    public void fold() {
+        folded = true;
+    }
+
+    public void unfold() {
+        folded = false;
+    }
+
+    public boolean isFolded() {
+        return folded;
     }
 }

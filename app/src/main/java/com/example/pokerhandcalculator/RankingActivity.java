@@ -29,6 +29,7 @@ public class RankingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ranking);
+        callApi();
 //        LinearLayout ln = findViewById(R.id.linearLayout);
 //        ln.addView();
     }
@@ -36,11 +37,8 @@ public class RankingActivity extends AppCompatActivity {
     public void callApi(){
         try {
             RequestQueue requestQueue = Volley.newRequestQueue(this);
-            String URL = "http://localhost:3000/solveround";
-            JSONObject jsonBody = new JSONObject();
-            jsonBody.put("Title", "Android Volley Demo");
-            jsonBody.put("Author", "BNK");
-            final String requestBody = jsonBody.toString();
+            String URL = "https://poker-hand-calculator.herokuapp.com/solveround";
+            final String requestBody = Round.getInstance().toJSON().toString();
 
             StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
                 @Override
@@ -80,7 +78,7 @@ public class RankingActivity extends AppCompatActivity {
             };
 
             requestQueue.add(stringRequest);
-        } catch (JSONException e) {
+        } catch (JSONException | NullCardException e) {
             e.printStackTrace();
         }
     }
