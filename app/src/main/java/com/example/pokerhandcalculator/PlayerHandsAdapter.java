@@ -113,12 +113,14 @@ public class PlayerHandsAdapter extends ArrayAdapter<Player> {
                     playerHandLinearLayout.removeAllViews();
                     System.out.println(foldButton.getText());
                     if (foldButton.getText().equals("Fold")) {
+                        player.fold();
                         TextView foldedTextView = new TextView(view.getContext());
                         playerHandLinearLayout.addView(foldedTextView);
                         foldedTextView.requestLayout();
                         foldedTextView.setText("FOLDED");
                         foldButton.setText("UNFOLD");
                     } else {
+                        player.unfold();
                         ImageView card1IV = new ImageView(view.getContext());
                         card1IV.setImageResource(R.drawable.card_back);
                         ImageView card2IV = new ImageView(view.getContext());

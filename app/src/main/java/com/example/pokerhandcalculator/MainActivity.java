@@ -6,6 +6,7 @@ import androidx.core.view.ViewCompat;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.KeyEvent;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    ArrayList<Player> players = new ArrayList<Player>();
+    ArrayList<Player> players = Round.getInstance().getPlayers();
     PlayerHandsAdapter adapter;
     int countPlayerHands = 0;
 
@@ -28,6 +29,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setHandsAdapter();
+
+        Button rankingButton = findViewById(R.id.findWinnerButton);
+        final Intent intent = new Intent(this, RankingActivity.class);
+        rankingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(intent);
+            }
+        });
+
+
     }
 
     protected void setHandsAdapter() {
