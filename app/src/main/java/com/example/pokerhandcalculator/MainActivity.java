@@ -8,7 +8,6 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.InputType;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -21,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayList<Player> players = new ArrayList<Player>();
     PlayerHandsAdapter adapter;
-    int countPlayerHands = 0;
+    int countPlayers = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         alertToShow.setButton(Dialog.BUTTON_POSITIVE,"OK",new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                players.add(new Player(countPlayerHands++,input.getText().toString()));
+                players.add(new Player(countPlayers++,input.getText().toString()));
                 adapter.notifyDataSetChanged();
                 final GridView phgv = findViewById(R.id.playerHandsGridView);
                 phgv.smoothScrollToPosition(players.size() - 1);            }
