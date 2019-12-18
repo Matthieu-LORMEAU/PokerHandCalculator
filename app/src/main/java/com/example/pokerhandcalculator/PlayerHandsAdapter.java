@@ -52,12 +52,12 @@ public class PlayerHandsAdapter extends ArrayAdapter<Player> {
             Button foldButton = v.findViewById(R.id.foldButton);
             ImageView iv1 = v.findViewById(R.id.card1ImageView);
             ImageView iv2 = v.findViewById(R.id.card2ImageView);
+            player.setImageViews(iv1,iv2);
             HashMap<ImageView, Card> ivToCard = new HashMap<>();
             ivToCard.put(iv1, player.getCards()[0]);
             ivToCard.put(iv2, player.getCards()[1]);
 
-            Utils.setImageCardsListeners(ivToCard);
-
+            Utils.setImageCardsListeners(player.getCards());
 
             foldButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -80,35 +80,7 @@ public class PlayerHandsAdapter extends ArrayAdapter<Player> {
                     }
                 }
             });
-//            TextView mt = (TextView) v.findViewById(R.id.middletext);
-//            TextView mtd = (TextView) v.findViewById(R.id.middletextdata);
-//            TextView bt = (TextView) v.findViewById(R.id.bottomtext);
-//            TextView btd = (TextView) v.findViewById(R.id.desctext);
-
-//             check to see if each individual textview is null.
-//             if not, assign some text!
-//            if (iv1 != null){
-//                tt.setText("Name: ");
-//            }
-//            if (ttd != null){
-//                ttd.setText(i.getName());
-//            }
-//            if (mt != null){
-//                mt.setText("Price: ");
-//            }
-//            if (mtd != null){
-//                mtd.setText("$" + i.getPrice());
-//            }
-//            if (bt != null){
-//                bt.setText("Details: ");
-//            }
-//            if (btd != null){
-//                btd.setText(i.getDetails());
-//            }
         }
-
-        // the view must be returned to our activity
         return v;
-
     }
 }

@@ -22,10 +22,9 @@ import java.util.Map;
 
 public class Utils {
 
-    public static void setImageCardsListeners(HashMap<ImageView, Card> ivToCard) {
-        for (Map.Entry item : ivToCard.entrySet()) {
-            final ImageView iv = (ImageView) item.getKey();
-            final Card card = (Card) item.getValue();
+    public static void setImageCardsListeners(Card[] cards) {
+        for (final Card card : cards) {
+            final ImageView iv = (ImageView) card.getIv();
             final Card.Suit[] suit = new Card.Suit[1];
             final Card.Face[] face = new Card.Face[1];
             iv.setOnClickListener(new View.OnClickListener() {

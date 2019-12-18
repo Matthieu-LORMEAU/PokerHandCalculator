@@ -1,6 +1,8 @@
 package com.example.pokerhandcalculator;
 
 
+import android.widget.ImageView;
+
 public class Card {
 
     public enum Face {
@@ -28,14 +30,15 @@ public class Card {
 
     private Face face;
     private Suit suit;
+    private ImageView iv;
 
     public Card (Face face, Suit suit) {
         this.face = face;
         this.suit = suit;
     }
 
-    public Card(){
-
+    public Card(ImageView iv){
+        this.iv = iv;
     }
 
     public Face getFace() {
@@ -52,6 +55,10 @@ public class Card {
 
     public void setSuit(Suit suit) {
         this.suit = suit;
+    }
+
+    public ImageView getIv() {
+        return iv;
     }
 
     @Override

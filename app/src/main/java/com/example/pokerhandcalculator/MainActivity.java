@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,8 +32,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Card[] cards = Round.getInstance().getCommunityCards();
+        cards[0] = new Card((ImageView) findViewById(R.id.communityImage1));
+        cards[1] = new Card((ImageView) findViewById(R.id.communityImage2));
+        cards[2] = new Card((ImageView) findViewById(R.id.communityImage3));
+        cards[3] = new Card((ImageView) findViewById(R.id.communityImage4));
+        cards[4] = new Card((ImageView) findViewById(R.id.communityImage5));
         setHandsAdapter();
         setCommunityCardsListeners();
+        setClearAllCardsListener();
         Button rankingButton = findViewById(R.id.findWinnerButton);
         final Intent intent = new Intent(this, RankingActivity.class);
         rankingButton.setOnClickListener(new View.OnClickListener() {
@@ -94,14 +102,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void setCommunityCardsListeners() {
-        Card[] communityCards = Round.getInstance().getCommunityCards();
-        HashMap<ImageView, Card> ivToCard = new HashMap<>();
-        ivToCard.put((ImageView) findViewById(R.id.communityImage1), communityCards[0]);
-        ivToCard.put((ImageView) findViewById(R.id.communityImage2), communityCards[1]);
-        ivToCard.put((ImageView) findViewById(R.id.communityImage3), communityCards[2]);
-        ivToCard.put((ImageView) findViewById(R.id.communityImage4), communityCards[3]);
-        ivToCard.put((ImageView) findViewById(R.id.communityImage5), communityCards[4]);
-        Utils.setImageCardsListeners(ivToCard);
+        Utils.setImageCardsListeners(Round.getInstance().getCommunityCards());
+    }
+
+    protected void setClearAllCardsListener() {
+        findViewById(R.id.newRoundButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Card[] comCards = Round.getInstance().getCommunityCards();
+                for (Card c : comCards) {
+                    c.getIv().setImageResource(R.drawable.card_back);
+                    c = new Card(c.getIv());
+                }
+            }
+        });
     }
 
 }

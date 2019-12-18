@@ -1,17 +1,22 @@
 package com.example.pokerhandcalculator;
 
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 public class Player {
     private int id;
     private String name;
-    private Card[] cards = new Card[]{new Card(),new Card()};
+    private Card[] cards ;
     boolean folded = false;
 
     public Player(int id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public void setImageViews(ImageView iv1, ImageView iv2){
+        cards =  new Card[]{new Card(iv1),new Card(iv2)};
     }
 
     public int getId() {

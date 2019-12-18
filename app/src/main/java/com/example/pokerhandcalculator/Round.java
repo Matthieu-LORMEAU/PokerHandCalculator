@@ -1,5 +1,7 @@
 package com.example.pokerhandcalculator;
 
+import android.widget.ImageView;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -24,7 +26,7 @@ public class Round {
 
     private ArrayList<Player> players = new ArrayList<Player>();
 
-    private Card[] communityCards = new Card[]{new Card(),new Card(),new Card(),new Card(),new Card()};
+    private Card[] communityCards = new Card[5];
 
 //    public void addPlayer(Player player) {
 //        players.put(player.getId(), player);
