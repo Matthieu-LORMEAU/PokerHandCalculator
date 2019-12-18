@@ -32,13 +32,16 @@ public class Card {
     private Suit suit;
     private ImageView iv;
 
-    public Card (Face face, Suit suit) {
+    public Card(Face face, Suit suit) {
         this.face = face;
         this.suit = suit;
     }
 
-    public Card(ImageView iv){
+    public Card(ImageView iv) {
         this.iv = iv;
+    }
+
+    public Card() {
     }
 
     public Face getFace() {
@@ -61,33 +64,73 @@ public class Card {
         return iv;
     }
 
+    public void setIv(ImageView iv) {
+        this.iv = iv;
+    }
+
     @Override
     public String toString() {
         String output = "";
 
         switch (this.face) {
-            case Ace:   output += 'A'; break;
-            case Two:   output += '2'; break;
-            case Three: output += '3'; break;
-            case Four:  output += '4'; break;
-            case Five:  output += '5'; break;
-            case Six:   output += '6'; break;
-            case Seven: output += '7'; break;
-            case Eight: output += '8'; break;
-            case Nine:  output += '9'; break;
-            case Ten:   output += 'T'; break;
-            case Jack:  output += 'J'; break;
-            case Queen: output += 'Q'; break;
-            case King:  output += 'K'; break;
-            default: break;
+            case Ace:
+                output += 'A';
+                break;
+            case Two:
+                output += '2';
+                break;
+            case Three:
+                output += '3';
+                break;
+            case Four:
+                output += '4';
+                break;
+            case Five:
+                output += '5';
+                break;
+            case Six:
+                output += '6';
+                break;
+            case Seven:
+                output += '7';
+                break;
+            case Eight:
+                output += '8';
+                break;
+            case Nine:
+                output += '9';
+                break;
+            case Ten:
+                output += 'T';
+                break;
+            case Jack:
+                output += 'J';
+                break;
+            case Queen:
+                output += 'Q';
+                break;
+            case King:
+                output += 'K';
+                break;
+            default:
+                break;
         }
 
         switch (this.suit) {
-            case Hearts:    output += 'H'; break;
-            case Spades:    output += 'S'; break;
-            case Clubs:     output += 'C'; break;
-            case Diamonds:  output += 'D'; break;
-            default: break;
+            case Hearts:
+                output += 'H';
+                break;
+            case Spades:
+                output += 'S';
+                break;
+            case Clubs:
+                output += 'C';
+                break;
+            case Diamonds:
+                output += 'D';
+                break;
+            default:
+                break;
         }
 
         return output;
@@ -98,28 +141,64 @@ public class Card {
 
 
         switch (this.suit) {
-            case Hearts:    output += "hearts"; break;
-            case Spades:    output += "spades"; break;
-            case Clubs:     output += "diamond"; break;
-            case Diamonds:  output += "club"; break;
-            default: break;
+            case Hearts:
+                output += "hearts";
+                break;
+            case Spades:
+                output += "spades";
+                break;
+            case Clubs:
+                output += "diamond";
+                break;
+            case Diamonds:
+                output += "club";
+                break;
+            default:
+                break;
         }
 
         switch (this.face) {
-            case Ace:   output += '1'; break;
-            case Two:   output += '2'; break;
-            case Three: output += '3'; break;
-            case Four:  output += '4'; break;
-            case Five:  output += '5'; break;
-            case Six:   output += '6'; break;
-            case Seven: output += '7'; break;
-            case Eight: output += '8'; break;
-            case Nine:  output += '9'; break;
-            case Ten:   output += "10"; break;
-            case Jack:  output += "11"; break;
-            case Queen: output += "12"; break;
-            case King:  output += "13"; break;
-            default: break;
+            case Ace:
+                output += '1';
+                break;
+            case Two:
+                output += '2';
+                break;
+            case Three:
+                output += '3';
+                break;
+            case Four:
+                output += '4';
+                break;
+            case Five:
+                output += '5';
+                break;
+            case Six:
+                output += '6';
+                break;
+            case Seven:
+                output += '7';
+                break;
+            case Eight:
+                output += '8';
+                break;
+            case Nine:
+                output += '9';
+                break;
+            case Ten:
+                output += "10";
+                break;
+            case Jack:
+                output += "11";
+                break;
+            case Queen:
+                output += "12";
+                break;
+            case King:
+                output += "13";
+                break;
+            default:
+                break;
         }
         return output;
     }

@@ -79,7 +79,6 @@ public class Utils {
                                 if (previousFace != null && previousSuit != null) {
                                     Round.getInstance().setUsedOrUnusedCard(previousSuit.ordinal(),previousFace.ordinal(),false);
                                 }
-
                                 card.setFace(face[0]);
                                 card.setSuit(suit[0]);
                                 String resName = card.getResourceName();

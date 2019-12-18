@@ -111,18 +111,26 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Card[] comCards = Round.getInstance().getCommunityCards();
                 for (Card c : comCards) {
+                    if (c.getSuit() != null && c.getFace() != null){
+                        System.out.println(c);
+                        System.out.println(c.getIv());
+                    }
                     c.getIv().setImageResource(R.drawable.card_back);
-                    c = new Card(c.getIv());
+                    c.setSuit(null);
+                    c.setFace(null);
                 }
-                for (Player p : players){
+                for (Player p : players) {
                     for (Card c : p.getCards()) {
+                        if (c.getSuit() != null && c.getFace() != null){
+                            System.out.println(c);
+                            System.out.println(c.getIv());
+                        }
                         c.getIv().setImageResource(R.drawable.card_back);
-                        c = new Card(c.getIv());
+                        c.setSuit(null);
+                        c.setFace(null);
                     }
                 }
-                System.out.println(Arrays.deepToString(Round.getInstance().getUsedCards()));
                 Round.getInstance().setUsedCards(new boolean[4][13]);
-                System.out.println(Arrays.deepToString(Round.getInstance().getUsedCards()));
             }
         });
     }

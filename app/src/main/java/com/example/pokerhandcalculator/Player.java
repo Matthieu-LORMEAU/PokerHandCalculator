@@ -7,7 +7,7 @@ import android.widget.LinearLayout;
 public class Player {
     private int id;
     private String name;
-    private Card[] cards ;
+    private Card[] cards = new Card[]{new Card(), new Card()};
     boolean folded = false;
 
     public Player(int id, String name) {
@@ -15,8 +15,9 @@ public class Player {
         this.name = name;
     }
 
-    public void setImageViews(ImageView iv1, ImageView iv2){
-        cards =  new Card[]{new Card(iv1),new Card(iv2)};
+    public void setImageViews(ImageView iv1, ImageView iv2) {
+        cards[0].setIv(iv1);
+        cards[1].setIv(iv2);
     }
 
     public int getId() {
@@ -59,5 +60,12 @@ public class Player {
 
     public boolean isFolded() {
         return folded;
+    }
+
+    public void addOrRemovePlayerCardsToUsedCards(boolean add) throws java.lang.NullPointerException {
+        for (Card c : this.cards) {
+            if (c.getSuit() != null && c.getFace() != null)
+                Round.getInstance().setUsedOrUnusedCard(c.getSuit().ordinal(), c.getFace().ordinal(), add);
+        }
     }
 }

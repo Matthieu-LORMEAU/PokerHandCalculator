@@ -44,7 +44,8 @@ public class PlayerHandsAdapter extends ArrayAdapter<Player> {
             removePlayerButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    remove(player);
+                    player.addOrRemovePlayerCardsToUsedCards(false);
+                    players.remove(player);
                     notifyDataSetChanged();
                 }
             });
@@ -72,11 +73,13 @@ public class PlayerHandsAdapter extends ArrayAdapter<Player> {
                         foldedTextView.setVisibility(TextView.VISIBLE);
                         iv1.setVisibility(ImageView.GONE);
                         iv2.setVisibility(ImageView.GONE);
+                        player.addOrRemovePlayerCardsToUsedCards(false);
                     } else {
                         foldButton.setText("Fold");
                         foldedTextView.setVisibility(TextView.GONE);
                         iv1.setVisibility(ImageView.VISIBLE);
                         iv2.setVisibility(ImageView.VISIBLE);
+                        player.addOrRemovePlayerCardsToUsedCards(true);
                     }
                 }
             });
