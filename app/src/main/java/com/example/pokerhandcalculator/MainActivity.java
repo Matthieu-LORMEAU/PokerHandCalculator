@@ -114,6 +114,12 @@ public class MainActivity extends AppCompatActivity {
                     c.getIv().setImageResource(R.drawable.card_back);
                     c = new Card(c.getIv());
                 }
+                for (Player p : players){
+                    for (Card c : p.getCards()) {
+                        c.getIv().setImageResource(R.drawable.card_back);
+                        c = new Card(c.getIv());
+                    }
+                }
             }
         });
     }
