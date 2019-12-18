@@ -6,7 +6,7 @@ import android.widget.LinearLayout;
 public class Player {
     private int id;
     private String name;
-    private Card[] cards = new Card[2];
+    private Card[] cards = new Card[]{new Card(),new Card()};
     boolean folded = false;
 
     public Player(int id, String name) {

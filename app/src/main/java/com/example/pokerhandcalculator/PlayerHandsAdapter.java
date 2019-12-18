@@ -7,17 +7,12 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.HashMap;
 
 
 public class PlayerHandsAdapter extends ArrayAdapter<Player> {
@@ -57,7 +52,11 @@ public class PlayerHandsAdapter extends ArrayAdapter<Player> {
             Button foldButton = v.findViewById(R.id.foldButton);
             ImageView iv1 = v.findViewById(R.id.card1ImageView);
             ImageView iv2 = v.findViewById(R.id.card2ImageView);
-            Utils.setImageCardsListeners(Arrays.asList(iv1,iv2));
+            HashMap<ImageView, Card> ivToCard = new HashMap<>();
+            ivToCard.put(iv1, player.getCards()[0]);
+            ivToCard.put(iv2, player.getCards()[1]);
+
+            Utils.setImageCardsListeners(ivToCard);
 
 
             foldButton.setOnClickListener(new View.OnClickListener() {

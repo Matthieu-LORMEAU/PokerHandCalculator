@@ -4,7 +4,7 @@ package com.example.pokerhandcalculator;
 public class Card {
 
     public enum Face {
-        One,
+        Ace,
         Two,
         Three,
         Four,
@@ -16,8 +16,7 @@ public class Card {
         Ten,
         Jack,
         Queen,
-        King,
-        Ace
+        King
     }
 
     enum Suit {
@@ -35,6 +34,10 @@ public class Card {
         this.suit = suit;
     }
 
+    public Card(){
+
+    }
+
     public Face getFace() {
         return face;
     }
@@ -43,13 +46,20 @@ public class Card {
         return suit;
     }
 
+    public void setFace(Face face) {
+        this.face = face;
+    }
+
+    public void setSuit(Suit suit) {
+        this.suit = suit;
+    }
+
     @Override
     public String toString() {
         String output = "";
 
         switch (this.face) {
             case Ace:   output += 'A'; break;
-            case One:   output += '1'; break;
             case Two:   output += '2'; break;
             case Three: output += '3'; break;
             case Four:  output += '4'; break;
@@ -73,6 +83,37 @@ public class Card {
             default: break;
         }
 
+        return output;
+    }
+
+    public String getResourceName() {
+        String output = "";
+
+
+        switch (this.suit) {
+            case Hearts:    output += "hearts"; break;
+            case Spades:    output += "spades"; break;
+            case Clubs:     output += "diamond"; break;
+            case Diamonds:  output += "club"; break;
+            default: break;
+        }
+
+        switch (this.face) {
+            case Ace:   output += '1'; break;
+            case Two:   output += '2'; break;
+            case Three: output += '3'; break;
+            case Four:  output += '4'; break;
+            case Five:  output += '5'; break;
+            case Six:   output += '6'; break;
+            case Seven: output += '7'; break;
+            case Eight: output += '8'; break;
+            case Nine:  output += '9'; break;
+            case Ten:   output += "10"; break;
+            case Jack:  output += "11"; break;
+            case Queen: output += "12"; break;
+            case King:  output += "13"; break;
+            default: break;
+        }
         return output;
     }
 }

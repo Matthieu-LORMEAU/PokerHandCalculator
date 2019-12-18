@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
 import android.view.WindowManager;
+import android.webkit.HttpAuthHandler;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -18,6 +19,7 @@ import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setHandsAdapter();
         setCommunityCardsListeners();
-
         Button rankingButton = findViewById(R.id.findWinnerButton);
         final Intent intent = new Intent(this, RankingActivity.class);
         rankingButton.setOnClickListener(new View.OnClickListener() {
@@ -93,7 +94,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void setCommunityCardsListeners() {
-        Utils.setImageCardsListeners(Arrays.asList((ImageView) findViewById(R.id.communityImage1), (ImageView) findViewById(R.id.communityImage2), (ImageView) findViewById(R.id.communityImage3), (ImageView) findViewById(R.id.communityImage4), (ImageView) findViewById(R.id.communityImage5)));
+        Card[] communityCards = Round.getInstance().getCommunityCards();
+        HashMap<ImageView, Card> ivToCard = new HashMap<>();
+        ivToCard.put((ImageView) findViewById(R.id.communityImage1), communityCards[0]);
+        ivToCard.put((ImageView) findViewById(R.id.communityImage2), communityCards[1]);
+        ivToCard.put((ImageView) findViewById(R.id.communityImage3), communityCards[2]);
+        ivToCard.put((ImageView) findViewById(R.id.communityImage4), communityCards[3]);
+        ivToCard.put((ImageView) findViewById(R.id.communityImage5), communityCards[4]);
+        Utils.setImageCardsListeners(ivToCard);
     }
 
 }

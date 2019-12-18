@@ -24,7 +24,7 @@ public class Round {
 
     private ArrayList<Player> players = new ArrayList<Player>();
 
-    private Card[] communityCards = new Card[5];
+    private Card[] communityCards = new Card[]{new Card(),new Card(),new Card(),new Card(),new Card()};
 
 //    public void addPlayer(Player player) {
 //        players.put(player.getId(), player);
@@ -80,6 +80,7 @@ public class Round {
 //    }
 
 
-
-
+    public Card[] getCommunityCards() {
+        return communityCards;
+    }
 }
