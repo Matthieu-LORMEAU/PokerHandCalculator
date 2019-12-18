@@ -120,6 +120,9 @@ public class MainActivity extends AppCompatActivity {
                         c = new Card(c.getIv());
                     }
                 }
+                System.out.println(Arrays.deepToString(Round.getInstance().getUsedCards()));
+                Round.getInstance().setUsedCards(new boolean[4][13]);
+                System.out.println(Arrays.deepToString(Round.getInstance().getUsedCards()));
             }
         });
     }
