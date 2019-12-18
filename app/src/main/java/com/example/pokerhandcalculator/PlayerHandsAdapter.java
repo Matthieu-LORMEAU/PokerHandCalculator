@@ -16,6 +16,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 public class PlayerHandsAdapter extends ArrayAdapter<Player> {
@@ -55,7 +57,7 @@ public class PlayerHandsAdapter extends ArrayAdapter<Player> {
             Button foldButton = v.findViewById(R.id.foldButton);
             ImageView iv1 = v.findViewById(R.id.card1ImageView);
             ImageView iv2 = v.findViewById(R.id.card2ImageView);
-            setImageCardsListeners(iv1, iv2, v);
+            Utils.setImageCardsListeners(Arrays.asList(iv1,iv2));
 
 
             foldButton.setOnClickListener(new View.OnClickListener() {
@@ -110,65 +112,4 @@ public class PlayerHandsAdapter extends ArrayAdapter<Player> {
         return v;
 
     }
-
-    public void setImageCardsListeners(ImageView iv1, ImageView iv2, View view) {
-        iv1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-                LayoutInflater layoutInflater = (LayoutInflater) v.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                View customView = layoutInflater.inflate(R.layout.card_picker, null);
-
-                final TableLayout ranksTableLayout = customView.findViewById(R.id.rankSelectTableLayout);
-                enableOrDisableRanks(false,ranksTableLayout);
-
-                LinearLayout suitLinearLayout = customView.findViewById(R.id.suitSelectLinearLayout);
-
-
-                for (int j = 0; j < suitLinearLayout.getChildCount(); j++) {
-                    suitLinearLayout.getChildAt(j).setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            LinearLayout parent = (LinearLayout) v.getParent();
-                            for (int j = 0; j < parent.getChildCount(); j++) {
-                                if (parent.getChildAt(j) instanceof ImageView) {
-                                    ImageView current = (ImageView) parent.getChildAt(j);
-                                    if (!current.equals(v)) {
-                                        current.setAlpha(0.33f);
-                                    } else {
-                                        current.setAlpha(1f);
-                                    }
-                                }
-                            }
-                            enableOrDisableRanks(true,ranksTableLayout);
-                        }
-                    });
-                }
-
-                builder.setView(customView);
-                builder.create();
-                builder.show();
-            }
-
-            public void enableOrDisableRanks(boolean bool,TableLayout ranksTableLayout) {
-                for (int i = 0; i < ranksTableLayout.getChildCount(); i++) {
-                    TableRow row = (TableRow) ranksTableLayout.getChildAt(i);
-                    for (int j = 0; j < row.getChildCount(); j++) {
-                        Button currentButton = (Button) row.getChildAt(j);
-                        currentButton.setEnabled(bool);
-                        if (bool){
-                            currentButton.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-
-                                }
-                            });
-                        }
-                    }
-                }
-            }
-        });
-    }
-
-
 }

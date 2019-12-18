@@ -14,8 +14,10 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setHandsAdapter();
+        setCommunityCardsListeners();
 
         Button rankingButton = findViewById(R.id.findWinnerButton);
         final Intent intent = new Intent(this, RankingActivity.class);
@@ -69,15 +72,16 @@ public class MainActivity extends AppCompatActivity {
         input.requestFocus();
 
         // Set up the buttons
-        alertToShow.setButton(Dialog.BUTTON_POSITIVE,"OK",new DialogInterface.OnClickListener() {
+        alertToShow.setButton(Dialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                players.add(new Player(countPlayers++,input.getText().toString()));
+                players.add(new Player(countPlayers++, input.getText().toString()));
                 adapter.notifyDataSetChanged();
                 final GridView phgv = findViewById(R.id.playerHandsGridView);
-                phgv.smoothScrollToPosition(players.size() - 1);            }
+                phgv.smoothScrollToPosition(players.size() - 1);
+            }
         });
-        alertToShow.setButton(Dialog.BUTTON_NEGATIVE,"CANCEL",new DialogInterface.OnClickListener() {
+        alertToShow.setButton(Dialog.BUTTON_NEGATIVE, "CANCEL", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
@@ -86,6 +90,10 @@ public class MainActivity extends AppCompatActivity {
         alertToShow.getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         alertToShow.show();
+    }
+
+    protected void setCommunityCardsListeners() {
+        Utils.setImageCardsListeners(Arrays.asList((ImageView) findViewById(R.id.communityImage1), (ImageView) findViewById(R.id.communityImage2), (ImageView) findViewById(R.id.communityImage3), (ImageView) findViewById(R.id.communityImage4), (ImageView) findViewById(R.id.communityImage5)));
     }
 
 }
