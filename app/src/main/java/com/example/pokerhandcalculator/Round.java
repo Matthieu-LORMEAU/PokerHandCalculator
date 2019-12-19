@@ -14,7 +14,7 @@ public class Round {
     public static Round getInstance() {
         if (singleton == null) {
             singleton = new Round();
-            singleton.setSampleRoundForDebug();
+//            singleton.setSampleRoundForDebug();
         }
         return singleton;
     }
@@ -24,21 +24,21 @@ public class Round {
     private Round() {
     }
 
-    private void setSampleRoundForDebug() {
-        Player player1 = new Player(0, "PLayer 1");
-        player1.setFirstCard(new Card(Card.Face.Ace, Card.Suit.Clubs));
-        player1.setSecondCard(new Card(Card.Face.Eight, Card.Suit.Hearts));
-        Player player2 = new Player(1, "PLayer 2");
-        player2.setFirstCard(new Card(Card.Face.King, Card.Suit.Clubs));
-        player2.setSecondCard(new Card(Card.Face.Jack, Card.Suit.Diamonds));
-        this.getPlayers().add(player1);
-        this.getPlayers().add(player2);
-        this.setCommunityCard(0, new Card(Card.Face.Ace, Card.Suit.Diamonds));
-        this.setCommunityCard(1, new Card(Card.Face.Nine, Card.Suit.Hearts));
-        this.setCommunityCard(2, new Card(Card.Face.Seven, Card.Suit.Clubs));
-        this.setCommunityCard(3, new Card(Card.Face.Ten, Card.Suit.Clubs));
-        this.setCommunityCard(4, new Card(Card.Face.Six, Card.Suit.Hearts));
-    }
+//    private void setSampleRoundForDebug() {
+//        Player player1 = new Player(0, "PLayer 1");
+//        player1.setFirstCard(new Card(Card.Face.Ace, Card.Suit.Clubs));
+//        player1.setSecondCard(new Card(Card.Face.Eight, Card.Suit.Hearts));
+//        Player player2 = new Player(1, "PLayer 2");
+//        player2.setFirstCard(new Card(Card.Face.King, Card.Suit.Clubs));
+//        player2.setSecondCard(new Card(Card.Face.Jack, Card.Suit.Diamonds));
+//        this.getPlayers().add(player1);
+//        this.getPlayers().add(player2);
+//        this.setCommunityCard(0, new Card(Card.Face.Ace, Card.Suit.Diamonds));
+//        this.setCommunityCard(1, new Card(Card.Face.Nine, Card.Suit.Hearts));
+//        this.setCommunityCard(2, new Card(Card.Face.Seven, Card.Suit.Clubs));
+//        this.setCommunityCard(3, new Card(Card.Face.Ten, Card.Suit.Clubs));
+//        this.setCommunityCard(4, new Card(Card.Face.Six, Card.Suit.Hearts));
+//    }
 
     private ArrayList<Player> players = new ArrayList<Player>();
 

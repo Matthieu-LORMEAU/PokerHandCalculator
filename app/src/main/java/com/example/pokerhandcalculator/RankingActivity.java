@@ -2,46 +2,39 @@ package com.example.pokerhandcalculator;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.NetworkResponse;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.HttpHeaderParser;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.UnsupportedEncodingException;
-import java.util.Iterator;
+import java.util.ArrayList;
 
 public class RankingActivity extends AppCompatActivity {
-
-
-    private TextView debugTextView;
+    ArrayList<Player> players = Round.getInstance().getPlayers();
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager layoutManager;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ranking);
-        debugTextView = findViewById(R.id.debugTextView);
         ApiConsumer apiConsumer = new ApiConsumer();
         apiConsumer.callApi(this);
         Round.getInstance().sortPlayersByRanking();
-//        LinearLayout ln = findViewById(R.id.linearLayout);
-//        ln.addView();
+        setRanksAdapter();
+    }
+
+    protected void setRanksAdapter() {
+        recyclerView = findViewById(R.id.playerRanksRecyclerView);
+        recyclerView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        mAdapter = new PlayerRanksAdapter(players);
+        recyclerView.setAdapter(mAdapter);
     }
 
 
