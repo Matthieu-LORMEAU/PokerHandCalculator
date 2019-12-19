@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
@@ -25,10 +26,14 @@ import java.util.Iterator;
 
 public class RankingActivity extends AppCompatActivity {
 
+
+    private TextView debugTextView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ranking);
+        debugTextView = findViewById(R.id.debugTextView);
         callApi();
 //        LinearLayout ln = findViewById(R.id.linearLayout);
 //        ln.addView();
@@ -44,6 +49,8 @@ public class RankingActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(String response) {
                     Log.i("VOLLEY", response);
+                    debugTextView.setText(response);
+
                 }
             }, new Response.ErrorListener() {
                 @Override
@@ -73,7 +80,7 @@ public class RankingActivity extends AppCompatActivity {
                         responseString = String.valueOf(response.statusCode);
                         // can get more details such as response.headers
                     }
-                    return Response.success(responseString, HttpHeaderParser.parseCacheHeaders(response));
+                    return super.parseNetworkResponse(response);// Response.success(responseString, HttpHeaderParser.parseCacheHeaders(response));
                 }
             };
 

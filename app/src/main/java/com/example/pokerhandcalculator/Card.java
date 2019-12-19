@@ -5,28 +5,10 @@ import android.widget.ImageView;
 
 public class Card {
 
-    public enum Face {
-        Ace,
-        Two,
-        Three,
-        Four,
-        Five,
-        Six,
-        Seven,
-        Eight,
-        Nine,
-        Ten,
-        Jack,
-        Queen,
-        King
-    }
+    public enum Face { Ace, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King }
 
-    enum Suit {
-        Hearts,
-        Spades,
-        Clubs,
-        Diamonds
-    }
+
+    enum Suit { Hearts, Spades, Clubs, Diamonds }
 
     private Face face;
     private Suit suit;

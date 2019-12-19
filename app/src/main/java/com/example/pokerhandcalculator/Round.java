@@ -8,9 +8,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Round {
 
@@ -19,6 +16,7 @@ public class Round {
     public static Round getInstance() {
         if (singleton == null) {
             singleton = new Round();
+            singleton.setSampleRoundForDebug();
         }
         return singleton;
     }
@@ -28,20 +26,28 @@ public class Round {
     private Round() {
     }
 
+    private void setSampleRoundForDebug() {
+        Player player1 = new Player(0, "PLayer 1");
+        player1.setFirstCard(new Card(Card.Face.Ace, Card.Suit.Clubs));
+        player1.setSecondCard(new Card(Card.Face.Eight, Card.Suit.Hearts));
+        Player player2 = new Player(1, "PLayer 2");
+        player2.setFirstCard(new Card(Card.Face.King, Card.Suit.Clubs));
+        player2.setSecondCard(new Card(Card.Face.Jack, Card.Suit.Diamonds));
+        this.getPlayers().add(player1);
+        this.getPlayers().add(player2);
+        this.setCommunityCard(0, new Card(Card.Face.Ace, Card.Suit.Diamonds));
+        this.setCommunityCard(1, new Card(Card.Face.Nine, Card.Suit.Hearts));
+        this.setCommunityCard(2, new Card(Card.Face.Seven, Card.Suit.Clubs));
+        this.setCommunityCard(3, new Card(Card.Face.Ten, Card.Suit.Clubs));
+        this.setCommunityCard(4, new Card(Card.Face.Six, Card.Suit.Hearts));
+    }
+
     private ArrayList<Player> players = new ArrayList<Player>();
 
-    private PlayerHandsAdapter adapter ;
+    private PlayerHandsAdapter adapter;
 
     private Card[] communityCards = new Card[5];
 
-
-//    public void addPlayer(Player player) {
-//        players.put(player.getId(), player);
-//    }
-
-    //    public void removePlayer(int id) {
-//        players.remove(id);
-//    }
     public void setCommunityCard(int index, Card card) {
         if (index < 0 || index > 4)
             throw new IllegalArgumentException("Index must be from 0 to 4");
@@ -71,7 +77,6 @@ public class Round {
         return body;
     }
 
-
     private String communityCardsToString() {
         StringBuilder sb = new StringBuilder();
         for (Card c : communityCards) {
@@ -81,12 +86,11 @@ public class Round {
         return sb.toString().trim();
     }
 
-
-//    private boolean isLegal(String visitorMessage) {
-//        if (visitorMessage == null) visitorMessage = new String();
-//
-//
-//    }
+    // private boolean isLegal(String visitorMessage) {
+    // if (visitorMessage == null) visitorMessage = new String();
+    //
+    //
+    // }
 
     public Card[] getCommunityCards() {
         return communityCards;

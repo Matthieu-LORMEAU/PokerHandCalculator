@@ -42,7 +42,7 @@ public class Player {
     public String getCardsAsString() throws NullCardException {
         if (cards[0] == null || cards[1] == null)
             throw new NullCardException();
-        return cards[0].toString() + cards[1].toString();
+        return cards[0].toString() + " " + cards[1].toString();
     }
 
     public void fold() {
