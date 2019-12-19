@@ -1,13 +1,11 @@
 package com.example.pokerhandcalculator;
 
-import android.inputmethodservice.KeyboardView;
-import android.widget.ImageView;
+import android.os.Build;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import androidx.annotation.RequiresApi;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class Round {
 
@@ -58,33 +56,6 @@ public class Round {
         return players;
     }
 
-    public JSONObject toJSON() throws JSONException, NullCardException {
-        JSONObject body = new JSONObject();
-        body.put("community_cards", communityCardsToString());
-
-        JSONArray players = new JSONArray();
-        for (Player player : getPlayers()) {
-            if (player.isFolded())
-                continue;
-            JSONObject playerJson = new JSONObject();
-            playerJson.put("name", player.getName());
-            playerJson.put("cards", player.getCardsAsString());
-            players.put(playerJson);
-        }
-
-        body.put("players", players);
-
-        return body;
-    }
-
-    private String communityCardsToString() {
-        StringBuilder sb = new StringBuilder();
-        for (Card c : communityCards) {
-            if (c != null)
-                sb.append(c.toString() + " ");
-        }
-        return sb.toString().trim();
-    }
 
     // private boolean isLegal(String visitorMessage) {
     // if (visitorMessage == null) visitorMessage = new String();
@@ -114,5 +85,31 @@ public class Round {
 
     public PlayerHandsAdapter getAdapter() {
         return adapter;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public void sortPlayersByRanking() {
+        players.sort(new Comparator<Player>() {
+            @Override
+            public int compare(Player playerA, Player playerB) {
+                if (playerA.isFolded() && playerB.isFolded())
+                    return 0;
+                else if (playerA.isFolded())
+                    return -1;
+                else if (playerB.isFolded())
+                    return 1;
+
+                return playerB.getRank() - playerA.getRank();
+            }
+        });
+    }
+
+    public Player findPlayerByName(String name) {
+        for (Player p : players) {
+            if (p.getName().equals(name)) {
+                return p;
+            }
+        }
+        return null;
     }
 }
