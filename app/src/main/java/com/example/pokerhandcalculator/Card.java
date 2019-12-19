@@ -113,8 +113,6 @@ public class Card {
         if (this.suit == null || this.face == null) {
             return null;
         }
-
-
         switch (this.suit) {
             case Hearts:
                 output += "hearts";

@@ -33,12 +33,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Card[] cards = Round.getInstance().getCommunityCards();
-        cards[0] = new Card();
-        cards[1] = new Card();
-        cards[2] = new Card();
-        cards[3] = new Card();
-        cards[4] = new Card();
+        for (int i = 0; i < 5; i++) {
+            Round.getInstance().setCommunityCard(i, new Card());
+        }
+        System.out.println(Arrays.deepToString(Round.getInstance().getCommunityCards()));
         comCardsImageViews = new ImageView[]{(ImageView) findViewById(R.id.communityImage1),
                 (ImageView) findViewById(R.id.communityImage2),
                 (ImageView) findViewById(R.id.communityImage3),
@@ -58,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void setHandsAdapter() {
-
         final GridView phgv = findViewById(R.id.playerHandsGridView);
         ViewCompat.setNestedScrollingEnabled(phgv, true);
         adapter = new PlayerHandsAdapter(this, R.layout.player_hand_item, players);
@@ -89,7 +86,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 players.add(new Player(countPlayers++, input.getText().toString()));
-                adapter.notifyDataSetChanged();
                 final GridView phgv = findViewById(R.id.playerHandsGridView);
                 phgv.smoothScrollToPosition(players.size() - 1);
             }
@@ -115,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Card[] comCards = Round.getInstance().getCommunityCards();
-                for (int i =0; i<5;i++) {
+                for (int i = 0; i < 5; i++) {
                     comCardsImageViews[i].setImageResource(R.drawable.card_back);
                     comCards[i].setSuit(null);
                     comCards[i].setFace(null);
