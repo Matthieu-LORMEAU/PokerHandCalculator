@@ -55,10 +55,16 @@ public class PlayerHandsAdapter extends ArrayAdapter<Player> {
             final ImageView iv1 = v.findViewById(R.id.card1ImageView);
             final ImageView iv2 = v.findViewById(R.id.card2ImageView);
             final TextView foldedTextView = v.findViewById(R.id.foldedTextView);
+
+            foldButton.setText("Fold");
+            foldedTextView.setVisibility(TextView.GONE);
+            iv1.setVisibility(ImageView.VISIBLE);
+            iv2.setVisibility(ImageView.VISIBLE);
+            player.addOrRemovePlayerCardsToUsedCards(true);
+
             Card[] cards = player.getCards();
 
             String resName1 = cards[0].getResourceName();
-            System.out.println(resName1);
             if(resName1!=null){
                 int id1 = v.getResources().getIdentifier(resName1, "drawable", v.getContext().getPackageName());
                 iv1.setImageResource(id1);
@@ -87,9 +93,7 @@ public class PlayerHandsAdapter extends ArrayAdapter<Player> {
                         iv1.setVisibility(ImageView.GONE);
                         iv2.setVisibility(ImageView.GONE);
                         player.addOrRemovePlayerCardsToUsedCards(false);
-                        System.out.println("right after folding : " + iv2);
                     } else {
-                        System.out.println("before unfolding : " + iv2);
                         foldButton.setText("Fold");
                         foldedTextView.setVisibility(TextView.GONE);
                         iv1.setVisibility(ImageView.VISIBLE);
