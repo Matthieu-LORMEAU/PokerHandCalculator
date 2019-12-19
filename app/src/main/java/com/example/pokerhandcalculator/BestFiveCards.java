@@ -1,11 +1,19 @@
 package com.example.pokerhandcalculator;
 
+import android.os.Build;
 import android.util.Pair;
 
+import androidx.annotation.RequiresApi;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
-public class BestFiveCards {
+import java.util.PriorityQueue;
+import java.util.Queue;
+
+public class BestFiveCards extends ArrayList<Pair<BestFiveCards.CombinationLabel, Card[]>> {
 
     public enum CombinationLabel {
         HighCard("Single card", 1),
@@ -28,14 +36,28 @@ public class BestFiveCards {
         }
     }
 
-    private List<Pair<CombinationLabel, Card[]>> combinations;
 
     public BestFiveCards() {
-        combinations = new ArrayList<Pair<CombinationLabel, Card[]>>();
+        super();
     }
 
     public void addCombination(CombinationLabel label, Card[] cards) {
-        this.combinations.add(new Pair<CombinationLabel, Card[]>(label, cards));
+        this.add(new Pair<CombinationLabel, Card[]>(label, cards));
+    }
+
+    public void addCombination(Pair<CombinationLabel, Card[]> combination) {
+        this.add(combination);
+    }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public void sortByCombinationValue() {
+        this.sort(new Comparator<Pair<CombinationLabel, Card[]>>() {
+            @Override
+            public int compare(Pair<CombinationLabel, Card[]> pairA, Pair<CombinationLabel, Card[]> pairB) {
+                return pairA.first.value - pairB.first.value;
+            }
+        });
     }
 
 }

@@ -9,6 +9,9 @@ public class Player {
     private String name;
     private Card[] cards = new Card[]{new Card(), new Card()};
     boolean folded = false;
+    private int rank = 0;
+
+    private BestFiveCards bestFive = new BestFiveCards();
 
     public Player(int id, String name) {
         this.id = id;
@@ -62,5 +65,22 @@ public class Player {
             if (c.getSuit() != null && c.getFace() != null)
                 Round.getInstance().setUsedOrUnusedCard(c.getSuit().ordinal(), c.getFace().ordinal(), add);
         }
+    }
+
+    public BestFiveCards getBestFive() {
+        return bestFive;
+    }
+
+    public void setBestFive(BestFiveCards bestFive) {
+        this.bestFive = bestFive;
+
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
+    }
+
+    public int getRank () {
+        return rank;
     }
 }
