@@ -15,11 +15,6 @@ public class Player {
         this.name = name;
     }
 
-    public void setImageViews(ImageView iv1, ImageView iv2) {
-        cards[0].setIv(iv1);
-        cards[1].setIv(iv2);
-    }
-
     public int getId() {
         return id;
     }

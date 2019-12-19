@@ -30,15 +30,10 @@ public class Card {
 
     private Face face;
     private Suit suit;
-    private ImageView iv;
 
     public Card(Face face, Suit suit) {
         this.face = face;
         this.suit = suit;
-    }
-
-    public Card(ImageView iv) {
-        this.iv = iv;
     }
 
     public Card() {
@@ -60,17 +55,12 @@ public class Card {
         this.suit = suit;
     }
 
-    public ImageView getIv() {
-        return iv;
-    }
-
-    public void setIv(ImageView iv) {
-        this.iv = iv;
-    }
-
     @Override
     public String toString() {
         String output = "";
+        if (this.suit == null || this.face == null) {
+            return null;
+        }
 
         switch (this.face) {
             case Ace:
@@ -138,6 +128,9 @@ public class Card {
 
     public String getResourceName() {
         String output = "";
+        if (this.suit == null || this.face == null) {
+            return null;
+        }
 
 
         switch (this.suit) {

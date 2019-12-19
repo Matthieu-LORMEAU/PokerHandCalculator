@@ -16,6 +16,7 @@ import android.widget.TableRow;
 
 import androidx.appcompat.app.AlertDialog;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,10 +24,11 @@ import java.util.stream.IntStream;
 
 public class Utils {
 
-    public static void setImageCardsListeners(Card[] cards) {
+    public static void setImageCardsListeners(Card[] cards, ImageView[] imageViews) {
         final Round round = Round.getInstance();
-        for (final Card card : cards) {
-            final ImageView iv = (ImageView) card.getIv();
+        for (int i = 0; i < cards.length; i++) {
+            final ImageView iv = imageViews[i];
+            final Card card = cards[i];
             final Card.Suit[] suit = new Card.Suit[1];
             final Card.Face[] face = new Card.Face[1];
             iv.setOnClickListener(new View.OnClickListener() {
@@ -73,11 +75,11 @@ public class Utils {
                         public void onClick(DialogInterface dialog, int which) {
                             if (face[0] != null && suit[0] != null) {
 
-                                Round.getInstance().setUsedOrUnusedCard(suit[0].ordinal(),face[0].ordinal(),true);
+                                Round.getInstance().setUsedOrUnusedCard(suit[0].ordinal(), face[0].ordinal(), true);
                                 Card.Suit previousSuit = card.getSuit();
                                 Card.Face previousFace = card.getFace();
                                 if (previousFace != null && previousSuit != null) {
-                                    Round.getInstance().setUsedOrUnusedCard(previousSuit.ordinal(),previousFace.ordinal(),false);
+                                    Round.getInstance().setUsedOrUnusedCard(previousSuit.ordinal(), previousFace.ordinal(), false);
                                 }
                                 card.setFace(face[0]);
                                 card.setSuit(suit[0]);

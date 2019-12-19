@@ -24,7 +24,7 @@ public class PlayerHandsAdapter extends ArrayAdapter<Player> {
         this.players = players;
     }
 
-    public View getView(final int position, final View convertView, ViewGroup parent) {
+    public View getView(final int position, final View convertView, final ViewGroup parent) {
 
         View v = convertView;
 
@@ -34,6 +34,7 @@ public class PlayerHandsAdapter extends ArrayAdapter<Player> {
         }
 
         final Player player = getItem(position);
+
 
         if (player != null) {
 
@@ -50,31 +51,45 @@ public class PlayerHandsAdapter extends ArrayAdapter<Player> {
                 }
             });
 
-            Button foldButton = v.findViewById(R.id.foldButton);
-            ImageView iv1 = v.findViewById(R.id.card1ImageView);
-            ImageView iv2 = v.findViewById(R.id.card2ImageView);
-            player.setImageViews(iv1,iv2);
-            HashMap<ImageView, Card> ivToCard = new HashMap<>();
-            ivToCard.put(iv1, player.getCards()[0]);
-            ivToCard.put(iv2, player.getCards()[1]);
+            final Button foldButton = v.findViewById(R.id.foldButton);
+            final ImageView iv1 = v.findViewById(R.id.card1ImageView);
+            final ImageView iv2 = v.findViewById(R.id.card2ImageView);
+            final TextView foldedTextView = v.findViewById(R.id.foldedTextView);
+            Card[] cards = player.getCards();
 
-            Utils.setImageCardsListeners(player.getCards());
+            String resName1 = cards[0].getResourceName();
+            System.out.println(resName1);
+            if(resName1!=null){
+                int id1 = v.getResources().getIdentifier(resName1, "drawable", v.getContext().getPackageName());
+                iv1.setImageResource(id1);
+            }
+            else{
+                iv1.setImageResource(R.drawable.card_back);
+            }
+
+            String resName2 = cards[1].getResourceName();
+            if(resName2!=null){
+                int id2 = v.getResources().getIdentifier(resName2, "drawable", v.getContext().getPackageName());
+                iv2.setImageResource(id2);
+            }
+            else{
+                iv2.setImageResource(R.drawable.card_back);
+            }
+
+            Utils.setImageCardsListeners(cards,new ImageView[]{iv1,iv2});
 
             foldButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    ConstraintLayout parent = (ConstraintLayout) view.getParent();
-                    Button foldButton = parent.findViewById(R.id.foldButton);
-                    ImageView iv1 = parent.findViewById(R.id.card1ImageView);
-                    ImageView iv2 = parent.findViewById(R.id.card2ImageView);
-                    TextView foldedTextView = parent.findViewById(R.id.foldedTextView);
                     if (foldButton.getText().equals("Fold")) {
                         foldButton.setText("Unfold");
                         foldedTextView.setVisibility(TextView.VISIBLE);
                         iv1.setVisibility(ImageView.GONE);
                         iv2.setVisibility(ImageView.GONE);
                         player.addOrRemovePlayerCardsToUsedCards(false);
+                        System.out.println("right after folding : " + iv2);
                     } else {
+                        System.out.println("before unfolding : " + iv2);
                         foldButton.setText("Fold");
                         foldedTextView.setVisibility(TextView.GONE);
                         iv1.setVisibility(ImageView.VISIBLE);

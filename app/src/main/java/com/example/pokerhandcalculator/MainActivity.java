@@ -27,17 +27,23 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Player> players = Round.getInstance().getPlayers();
     PlayerHandsAdapter adapter;
     int countPlayers = 0;
+    ImageView[] comCardsImageViews;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Card[] cards = Round.getInstance().getCommunityCards();
-        cards[0] = new Card((ImageView) findViewById(R.id.communityImage1));
-        cards[1] = new Card((ImageView) findViewById(R.id.communityImage2));
-        cards[2] = new Card((ImageView) findViewById(R.id.communityImage3));
-        cards[3] = new Card((ImageView) findViewById(R.id.communityImage4));
-        cards[4] = new Card((ImageView) findViewById(R.id.communityImage5));
+        cards[0] = new Card();
+        cards[1] = new Card();
+        cards[2] = new Card();
+        cards[3] = new Card();
+        cards[4] = new Card();
+        comCardsImageViews = new ImageView[]{(ImageView) findViewById(R.id.communityImage1),
+                (ImageView) findViewById(R.id.communityImage2),
+                (ImageView) findViewById(R.id.communityImage3),
+                (ImageView) findViewById(R.id.communityImage4),
+                (ImageView) findViewById(R.id.communityImage5)};
         setHandsAdapter();
         setCommunityCardsListeners();
         setClearAllCardsListener();
@@ -49,8 +55,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
     }
 
     protected void setHandsAdapter() {
@@ -59,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         ViewCompat.setNestedScrollingEnabled(phgv, true);
         adapter = new PlayerHandsAdapter(this, R.layout.player_hand_item, players);
         phgv.setAdapter(adapter);
-
+        Round.getInstance().setAdapter(adapter);
         Button addPlayer = findViewById(R.id.addPlayerButton);
         addPlayer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,7 +106,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void setCommunityCardsListeners() {
-        Utils.setImageCardsListeners(Round.getInstance().getCommunityCards());
+        Utils.setImageCardsListeners(Round.getInstance().getCommunityCards(),
+                comCardsImageViews);
     }
 
     protected void setClearAllCardsListener() {
@@ -110,27 +115,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Card[] comCards = Round.getInstance().getCommunityCards();
-                for (Card c : comCards) {
-                    if (c.getSuit() != null && c.getFace() != null){
-                        System.out.println(c);
-                        System.out.println(c.getIv());
-                    }
-                    c.getIv().setImageResource(R.drawable.card_back);
-                    c.setSuit(null);
-                    c.setFace(null);
+                for (int i =0; i<5;i++) {
+                    comCardsImageViews[i].setImageResource(R.drawable.card_back);
+                    comCards[i].setSuit(null);
+                    comCards[i].setFace(null);
                 }
-                for (Player p : players) {
+                for (Player p : Round.getInstance().getPlayers()) {
                     for (Card c : p.getCards()) {
-                        if (c.getSuit() != null && c.getFace() != null){
-                            System.out.println(c);
-                            System.out.println(c.getIv());
-                        }
-                        c.getIv().setImageResource(R.drawable.card_back);
                         c.setSuit(null);
                         c.setFace(null);
                     }
                 }
                 Round.getInstance().setUsedCards(new boolean[4][13]);
+                adapter.notifyDataSetChanged();
             }
         });
     }

@@ -1,5 +1,6 @@
 package com.example.pokerhandcalculator;
 
+import android.inputmethodservice.KeyboardView;
 import android.widget.ImageView;
 
 import org.json.JSONArray;
@@ -28,6 +29,8 @@ public class Round {
     }
 
     private ArrayList<Player> players = new ArrayList<Player>();
+
+    private PlayerHandsAdapter adapter ;
 
     private Card[] communityCards = new Card[5];
 
@@ -99,5 +102,13 @@ public class Round {
 
     public void setUsedOrUnusedCard(int suit, int face, boolean used) {
         this.usedCards[suit][face] = used;
+    }
+
+    public void setAdapter(PlayerHandsAdapter adapter) {
+        this.adapter = adapter;
+    }
+
+    public PlayerHandsAdapter getAdapter() {
+        return adapter;
     }
 }
