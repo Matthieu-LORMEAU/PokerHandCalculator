@@ -1,7 +1,9 @@
 package com.example.pokerhandcalculator;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.LinearLayout;
@@ -29,6 +31,7 @@ public class RankingActivity extends AppCompatActivity {
 
     private TextView debugTextView;
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +39,7 @@ public class RankingActivity extends AppCompatActivity {
         debugTextView = findViewById(R.id.debugTextView);
         ApiConsumer apiConsumer = new ApiConsumer();
         apiConsumer.callApi(this);
+        Round.getInstance().sortPlayersByRanking();
 //        LinearLayout ln = findViewById(R.id.linearLayout);
 //        ln.addView();
     }
