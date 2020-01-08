@@ -58,10 +58,6 @@ public class MainActivity extends AppCompatActivity {
                         alert.show();
                         return;
                     }
-//            System.out.println(cards[0].getFace());
-//            System.out.println(cards[0].getSuit() + "\n");
-//            System.out.println(cards[1].getFace());
-//            System.out.println(cards[1].getSuit());
                 }
                 startActivity(intent);
             }

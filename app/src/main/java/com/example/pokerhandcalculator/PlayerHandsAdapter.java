@@ -52,11 +52,17 @@ public class PlayerHandsAdapter extends ArrayAdapter<Player> {
             final ImageView iv2 = v.findViewById(R.id.card2ImageView);
             final TextView foldedTextView = v.findViewById(R.id.foldedTextView);
 
-            foldButton.setText("Fold");
-            foldedTextView.setVisibility(TextView.GONE);
-            iv1.setVisibility(ImageView.VISIBLE);
-            iv2.setVisibility(ImageView.VISIBLE);
-            player.addOrRemovePlayerCardsToUsedCards(true);
+            if (player.isFolded()) {
+                foldButton.setText("Unfold");
+                foldedTextView.setVisibility(TextView.VISIBLE);
+                iv1.setVisibility(ImageView.GONE);
+                iv2.setVisibility(ImageView.GONE);
+            } else {
+                foldButton.setText("Fold");
+                foldedTextView.setVisibility(TextView.GONE);
+                iv1.setVisibility(ImageView.VISIBLE);
+                iv2.setVisibility(ImageView.VISIBLE);
+            }
 
             Card[] cards = player.getCards();
 
@@ -83,7 +89,7 @@ public class PlayerHandsAdapter extends ArrayAdapter<Player> {
             foldButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (foldButton.getText().equals("Fold")) {
+                    if (!player.isFolded()) {
                         foldButton.setText("Unfold");
                         foldedTextView.setVisibility(TextView.VISIBLE);
                         iv1.setVisibility(ImageView.GONE);

@@ -16,6 +16,7 @@
         android:text="@string/community_cards"
         android:textColor="#FAFAFA"
         android:textStyle="bold"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -115,7 +116,15 @@
         </GridView>
 
     </LinearLayout>
-
+    <View
+        android:id="@+id/view3"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
