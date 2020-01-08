@@ -25,7 +25,7 @@ public class RankingActivity extends AppCompatActivity {
         ApiConsumer apiConsumer = new ApiConsumer();
         apiConsumer.callApi(this);
         Round.getInstance().sortPlayersByRanking();
-        setRanksAdapter();
+        //setRanksAdapter();
     }
 
     protected void setRanksAdapter() {

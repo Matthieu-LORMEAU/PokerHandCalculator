@@ -20,6 +20,7 @@ public class JSONRankingParser {
                 JSONObject playerJson = json.getJSONObject(nom);
                 Player player = Round.getInstance().findPlayerByName(nom);
                 player.setBestFive(parseHand(playerJson));
+                player.setRank(playerJson.getInt("rank"));
             } catch (JSONException e) {
                 // Something went wrong!
             }

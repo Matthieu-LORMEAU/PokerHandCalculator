@@ -2,6 +2,7 @@ package com.example.pokerhandcalculator;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Adapter;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
@@ -20,7 +21,7 @@ import java.io.UnsupportedEncodingException;
 
 public class ApiConsumer {
 
-    public void callApi(Context context){
+    public void callApi(final RankingActivity context){
         try {
             RequestQueue requestQueue = Volley.newRequestQueue(context);
             String URL = "https://poker-hand-calculator.herokuapp.com/solveround";
@@ -39,9 +40,8 @@ public class ApiConsumer {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
-                    //debugTextView.setText(response);
-
+                    VolleyLog.v(response);
+                    context.setRanksAdapter();
                 }
             }, new Response.ErrorListener() {
                 @Override

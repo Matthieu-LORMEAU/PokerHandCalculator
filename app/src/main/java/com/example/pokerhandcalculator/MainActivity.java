@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
                 (ImageView) findViewById(R.id.communityImage3),
                 (ImageView) findViewById(R.id.communityImage4),
                 (ImageView) findViewById(R.id.communityImage5)};
+
         setHandsAdapter();
         setCommunityCardsListeners();
         setClearAllCardsListener();
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
     }
 
     protected void setHandsAdapter() {

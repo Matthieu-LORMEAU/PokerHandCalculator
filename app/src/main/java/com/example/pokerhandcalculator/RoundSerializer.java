@@ -1,5 +1,7 @@
 package com.example.pokerhandcalculator;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,6 +36,7 @@ public class RoundSerializer {
             if (c != null)
                 sb.append(c.toString() + " ");
         }
+        Log.d("Round", sb.toString());
         return sb.toString().trim();
     }
 }

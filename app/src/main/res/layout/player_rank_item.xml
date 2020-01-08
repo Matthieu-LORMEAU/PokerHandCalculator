@@ -71,25 +71,25 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/highestCardTextView"
+        android:id="@+id/combination2TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/combinationTextView"
-        app:layout_constraintTop_toTopOf="@+id/combinationTextView" />
+        app:layout_constraintStart_toEndOf="@+id/combination1TextView"
+        app:layout_constraintTop_toTopOf="@+id/combination1TextView" />
 
     <TextView
-        android:id="@+id/combinationTextView"
+        android:id="@+id/combination1TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/highestCardTextView"
+        app:layout_constraintEnd_toStartOf="@+id/combination2TextView"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/playerCombinationLinearLayout" />
