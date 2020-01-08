@@ -1,6 +1,7 @@
 package com.example.pokerhandcalculator;
 
 import android.app.Dialog;
+import android.util.Log;
 import android.util.Pair;
 
 import org.json.JSONArray;
@@ -34,7 +35,9 @@ public class JSONRankingParser {
             JSONArray combinationsJsonArray = playerJson.getJSONArray("combinations");
             for (int i = 0; i < combinationsJsonArray.length(); i++) {
                 JSONArray combinationJsonArray = combinationsJsonArray.getJSONArray(i);
-                bestFive.addCombination(parseCombination(combinationJsonArray));
+                Pair<BestFiveCards.CombinationLabel, Card[]> comb = parseCombination(combinationJsonArray);
+                if (comb != null)
+                    bestFive.addCombination(comb);
             }
             return bestFive;
         } catch (JSONException e) {
@@ -54,6 +57,7 @@ public class JSONRankingParser {
             return new Pair<BestFiveCards.CombinationLabel, Card[]>(combinationLabel, cards);
         } catch (JSONException e) {
             e.printStackTrace();
+            Log.e("Prout", e.toString() );
             return null;
         }
     }

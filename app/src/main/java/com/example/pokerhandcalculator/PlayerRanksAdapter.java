@@ -102,6 +102,17 @@ public class PlayerRanksAdapter extends RecyclerView.Adapter<PlayerRanksAdapter.
 
             i++;
         }
+
+        if (j <= 4) {
+            holder.playerCombinationLL.findViewById(R.id.card5ImageView).setVisibility(ImageView.GONE);
+            if (j <= 3) {
+                holder.playerCombinationLL.findViewById(R.id.card4ImageView).setVisibility(ImageView.GONE);
+                if (j <= 2) {
+                    holder.playerCombinationLL.findViewById(R.id.card3ImageView).setVisibility(ImageView.GONE);
+                }
+            }
+        }
+
         holder.playerNameTV.setText(currentPlayer.getName());
         holder.playerRankTV.setText("Rank#" + currentPlayer.getRank());
 

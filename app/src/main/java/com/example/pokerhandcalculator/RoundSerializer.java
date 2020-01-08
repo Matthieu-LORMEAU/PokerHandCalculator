@@ -33,7 +33,7 @@ public class RoundSerializer {
     private String communityCardsToString(Round round) {
         StringBuilder sb = new StringBuilder();
         for (Card c : round.getCommunityCards()) {
-            if (c != null)
+            if (c.getFace() != null)
                 sb.append(c.toString() + " ");
         }
         Log.d("Round", sb.toString());
