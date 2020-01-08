@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
 import android.view.WindowManager;
-import android.webkit.HttpAuthHandler;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -19,8 +18,6 @@ import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     PlayerHandsAdapter adapter;
     int countPlayers = 0;
     ImageView[] comCardsImageViews;
+    Button displayRankingButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,11 +44,26 @@ public class MainActivity extends AppCompatActivity {
         setHandsAdapter();
         setCommunityCardsListeners();
         setClearAllCardsListener();
-        Button rankingButton = findViewById(R.id.findWinnerButton);
+        this.displayRankingButton = findViewById(R.id.findWinnerButton);
         final Intent intent = new Intent(this, RankingActivity.class);
-        rankingButton.setOnClickListener(new View.OnClickListener() {
+        displayRankingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                for (Player p : Round.getInstance().getPlayers()) {
+                    Card[] cards = p.getCards();
+                    if ((cards[0].getFace() == null || cards[1].getFace() == null) && !p.isFolded()){
+                        AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
+                        alert.setTitle("Incomplete hands !");
+                        alert.setMessage("Some players are missing cards or are not folded");
+                        alert.setPositiveButton("OK",null);
+                        alert.show();
+                        return;
+                    }
+//            System.out.println(cards[0].getFace());
+//            System.out.println(cards[0].getSuit() + "\n");
+//            System.out.println(cards[1].getFace());
+//            System.out.println(cards[1].getSuit());
+                }
                 startActivity(intent);
             }
         });

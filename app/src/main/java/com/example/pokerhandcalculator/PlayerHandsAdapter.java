@@ -8,12 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import androidx.constraintlayout.widget.ConstraintLayout;
-
 import java.util.ArrayList;
-import java.util.HashMap;
-
 
 public class PlayerHandsAdapter extends ArrayAdapter<Player> {
 
@@ -93,12 +88,14 @@ public class PlayerHandsAdapter extends ArrayAdapter<Player> {
                         iv1.setVisibility(ImageView.GONE);
                         iv2.setVisibility(ImageView.GONE);
                         player.addOrRemovePlayerCardsToUsedCards(false);
+                        player.fold();
                     } else {
                         foldButton.setText("Fold");
                         foldedTextView.setVisibility(TextView.GONE);
                         iv1.setVisibility(ImageView.VISIBLE);
                         iv2.setVisibility(ImageView.VISIBLE);
                         player.addOrRemovePlayerCardsToUsedCards(true);
+                        player.unfold();
                     }
                 }
             });
