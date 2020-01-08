@@ -26,6 +26,7 @@ public class PlayerHandsAdapter extends ArrayAdapter<Player> {
         if (v == null) {
             LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             v = inflater.inflate(R.layout.player_hand_item, null);
+            v.setClipToOutline(true);
         }
 
         final Player player = getItem(position);
