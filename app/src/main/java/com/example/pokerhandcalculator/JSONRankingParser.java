@@ -62,7 +62,6 @@ public class JSONRankingParser {
             String face = cardJson.getString("face");
             String suit = cardJson.getString("suit");
             return new Card(stringToCardFace(face), stringToCardSuit(suit));
-
         } catch (JSONException e) {
             e.printStackTrace();
             return null;
