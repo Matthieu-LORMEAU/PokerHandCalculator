@@ -63,7 +63,7 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ffad6d"
+        android:background="@color/colorPrimary"
         android:gravity="center_horizontal|fill_horizontal"
         android:orientation="horizontal"
         android:paddingTop="8dp"
@@ -79,9 +79,10 @@
             android:layout_weight="1" />
 
         <Button
-            android:id="@+id/newRoundButton"
+            android:id="@+id/backButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/white"
             android:text="@string/new_round" />
 
         <Space

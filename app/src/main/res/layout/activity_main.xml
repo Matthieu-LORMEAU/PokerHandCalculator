@@ -125,11 +125,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ffad6d"
+        android:background="@color/colorPrimary"
         android:gravity="center_horizontal|fill_horizontal"
         android:orientation="horizontal"
         android:paddingTop="8dp"
@@ -144,9 +145,10 @@
             android:layout_weight="1" />
 
         <Button
-            android:id="@+id/newRoundButton"
+            android:id="@+id/backButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/white"
             android:text="@string/clear_all_cards" />
 
         <Space
@@ -158,6 +160,7 @@
             android:id="@+id/findWinnerButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/white"
             android:text="@string/find_winner" />
 
         <Space
@@ -172,6 +175,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
+        android:backgroundTint="@android:color/white"
         android:text="@string/add_a_player"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"

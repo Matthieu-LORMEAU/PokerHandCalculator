@@ -103,6 +103,10 @@ public class PlayerRanksAdapter extends RecyclerView.Adapter<PlayerRanksAdapter.
             i++;
         }
 
+        if (i < 2) {
+            holder.comb2TV.setVisibility(View.GONE);
+        }
+
         if (j <= 4) {
             holder.playerCombinationLL.findViewById(R.id.card5ImageView).setVisibility(ImageView.GONE);
             if (j <= 3) {
@@ -114,7 +118,9 @@ public class PlayerRanksAdapter extends RecyclerView.Adapter<PlayerRanksAdapter.
         }
 
         holder.playerNameTV.setText(currentPlayer.getName());
-        holder.playerRankTV.setText("Rank#" + currentPlayer.getRank());
+        int rank = currentPlayer.getRank();
+        String rankLabel = rank == 1 ? "Winner !" : "#"+rank;
+        holder.playerRankTV.setText(rankLabel);
 
 
 

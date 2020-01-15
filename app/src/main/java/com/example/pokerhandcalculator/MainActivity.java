@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void setClearAllCardsListener() {
-        findViewById(R.id.newRoundButton).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.backButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Card[] comCards = Round.getInstance().getCommunityCards();

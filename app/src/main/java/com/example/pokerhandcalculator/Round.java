@@ -100,7 +100,7 @@ public class Round {
                 else if (playerB.isFolded())
                     return 1;
 
-                return playerB.getRank() - playerA.getRank();
+                return playerA.getRank() - playerB.getRank();
             }
         });
     }

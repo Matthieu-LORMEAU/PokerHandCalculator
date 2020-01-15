@@ -1,8 +1,14 @@
 package com.example.pokerhandcalculator;
 
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.os.Build;
 import android.util.Log;
 import android.widget.Adapter;
+import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
@@ -28,7 +34,16 @@ public class ApiConsumer {
             final RoundSerializer roundFormatter = new RoundSerializer();
             final String requestBody = roundFormatter.getJSONOf(Round.getInstance()).toString();
 
+            final ProgressDialog progress = new ProgressDialog(context);
+            progress.setTitle("Loading");
+            progress.setMessage("Wait while loading...");
+            progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
+            progress.show();
+// To dismiss the dialog
+
+
             StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+                @RequiresApi(api = Build.VERSION_CODES.N)
                 @Override
                 public void onResponse(String response) {
                     Log.i("VOLLEY", response);
@@ -41,12 +56,18 @@ public class ApiConsumer {
                         e.printStackTrace();
                     }
                     VolleyLog.v(response);
+                    Round.getInstance().sortPlayersByRanking();
+                    progress.dismiss();
                     context.setRanksAdapter();
                 }
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     Log.e("VOLLEY", error.toString());
+                    progress.dismiss();
+                    Toast errorToast = Toast.makeText(context, "Could not connect to the server", Toast.LENGTH_LONG);
+                    errorToast.show();
+                    context.finish();
                 }
             }) {
                 @Override

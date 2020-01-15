@@ -1,10 +1,10 @@
 <resources>
-    <string name="app_name">PokerHandCalculator</string>
+    <string name="app_name">Poker Hand Calculator</string>
     <string name="community_cards">Community Cards</string>
     <string name="add_a_player">Add a player</string>
     <string name="find_winner">Find Winner</string>
     <string name="clear_all_cards">Clear All Cards</string>
     <string name="no_card">No Card</string>
-    <string name="new_round">New Round</string>
+    <string name="new_round">Back</string>
     <string name="ranking">Ranking</string>
 </resources>

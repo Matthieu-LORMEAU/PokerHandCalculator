@@ -7,7 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.widget.TextView;
+import android.view.View;
+import android.widget.Button;
 
 import java.util.ArrayList;
 
@@ -26,6 +27,13 @@ public class RankingActivity extends AppCompatActivity {
         apiConsumer.callApi(this);
         Round.getInstance().sortPlayersByRanking();
         //setRanksAdapter();
+        Button newRoundButton = findViewById(R.id.backButton);
+        newRoundButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                RankingActivity.super.onBackPressed();
+            }
+        });
     }
 
     protected void setRanksAdapter() {
