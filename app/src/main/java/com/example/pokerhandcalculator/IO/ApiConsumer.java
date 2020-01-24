@@ -16,6 +16,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.pokerhandcalculator.MainActivity;
 import com.example.pokerhandcalculator.Model.NullCardException;
 import com.example.pokerhandcalculator.Model.Player;
 import com.example.pokerhandcalculator.Model.Round;
@@ -27,6 +28,30 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 
 public class ApiConsumer {
+
+    // notre API est sur Heroku et "s'endort" au bout de 30 min d'inactivité,
+    // ce qui fait que la premiere requete met du temps a aboutir, donc on envoie
+    // une requete au lancement e lappli pour reveiller le serveur
+    public void wakeUpServer(final MainActivity context) {
+        Volley.newRequestQueue(context)
+                .add(
+                        new StringRequest(
+                                Request.Method.GET,
+                                "https://poker-hand-calculator.herokuapp.com/solveround",
+                                new Response.Listener<String>() {
+                                    @Override
+                                    public void onResponse(String response) {
+
+                                    }
+                                },
+                                new Response.ErrorListener() {
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+
+                                    }
+                                }
+                        ));
+    }
 
     public void callApi(final RankingActivity context){
         try {

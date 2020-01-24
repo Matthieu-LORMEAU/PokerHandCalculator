@@ -17,12 +17,15 @@ import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.example.pokerhandcalculator.Adapters.PlayerHandsAdapter;
+import com.example.pokerhandcalculator.IO.ApiConsumer;
 import com.example.pokerhandcalculator.Model.Card;
 import com.example.pokerhandcalculator.Model.Player;
 import com.example.pokerhandcalculator.Model.Round;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        new ApiConsumer().wakeUpServer(this);
+
         for (int i = 0; i < 5; i++) {
             Round.getInstance().setCommunityCard(i, new Card());
         }
@@ -54,6 +60,15 @@ public class MainActivity extends AppCompatActivity {
         displayRankingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ArrayList<Player> players = Round.getInstance().getPlayers();
+                if (players.size() == 0) {
+                    AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
+                    alert.setTitle("No player in the game");
+                    alert.setMessage("Add some players first :)");
+                    alert.setPositiveButton("OK",null);
+                    alert.show();
+                    return;
+                }
                 for (Player p : Round.getInstance().getPlayers()) {
                     Card[] cards = p.getCards();
                     if ((cards[0].getFace() == null || cards[1].getFace() == null) && !p.isFolded()){
@@ -101,6 +116,16 @@ public class MainActivity extends AppCompatActivity {
         alertToShow.setButton(Dialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                for (Player p : Round.getInstance().getPlayers()) {
+                    if (p.getName().toLowerCase().equals(input.getText().toString().toLowerCase())) {
+                        AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
+                        alert.setTitle("Another player has this name");
+                        alert.setMessage("Please set another name");
+                        alert.setPositiveButton("OK",null);
+                        alert.show();
+                        return;
+                    }
+                }
                 players.add(new Player(countPlayers++, input.getText().toString()));
                 final GridView phgv = findViewById(R.id.playerHandsGridView);
                 phgv.smoothScrollToPosition(players.size() - 1);
