@@ -105,19 +105,24 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         AlertDialog alertToShow = builder.create();
         alertToShow.setTitle("Player name");
-        // Set up the input
         final EditText input = new EditText(this);
-        // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
-        input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
+        input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES | InputType.TYPE_TEXT_VARIATION_PERSON_NAME);
         alertToShow.setView(input);
         input.requestFocus();
-
-        // Set up the buttons
         alertToShow.setButton(Dialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                String nameInput = input.getText().toString();
+                if (nameInput.isEmpty()) {
+                    AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
+                    alert.setTitle("Your name is empty");
+                    alert.setMessage("Please set a non empty name");
+                    alert.setPositiveButton("OK",null);
+                    alert.show();
+                    return;
+                }
                 for (Player p : Round.getInstance().getPlayers()) {
-                    if (p.getName().toLowerCase().equals(input.getText().toString().toLowerCase())) {
+                    if (p.getName().toLowerCase().equals(nameInput.toLowerCase())) {
                         AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
                         alert.setTitle("Another player has this name");
                         alert.setMessage("Please set another name");
@@ -126,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
                         return;
                     }
                 }
-                players.add(new Player(countPlayers++, input.getText().toString()));
+                players.add(new Player(countPlayers++, nameInput.toString()));
                 final GridView phgv = findViewById(R.id.playerHandsGridView);
                 phgv.smoothScrollToPosition(players.size() - 1);
             }
