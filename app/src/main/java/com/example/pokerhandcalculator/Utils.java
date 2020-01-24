@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -14,6 +13,9 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 
 import androidx.appcompat.app.AlertDialog;
+
+import com.example.pokerhandcalculator.Model.Card;
+import com.example.pokerhandcalculator.Model.Round;
 
 public class Utils {
 

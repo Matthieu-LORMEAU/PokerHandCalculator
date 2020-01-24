@@ -1,8 +1,10 @@
-package com.example.pokerhandcalculator;
+package com.example.pokerhandcalculator.Model;
 
 import android.os.Build;
 
 import androidx.annotation.RequiresApi;
+
+import com.example.pokerhandcalculator.Adapters.PlayerHandsAdapter;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -96,9 +98,9 @@ public class Round {
                 if (playerA.isFolded() && playerB.isFolded())
                     return 0;
                 else if (playerA.isFolded())
-                    return -1;
-                else if (playerB.isFolded())
                     return 1;
+                else if (playerB.isFolded())
+                    return -1;
 
                 return playerA.getRank() - playerB.getRank();
             }

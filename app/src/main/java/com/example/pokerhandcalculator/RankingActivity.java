@@ -10,6 +10,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.pokerhandcalculator.Adapters.PlayerRanksAdapter;
+import com.example.pokerhandcalculator.IO.ApiConsumer;
+import com.example.pokerhandcalculator.Model.Player;
+import com.example.pokerhandcalculator.Model.Round;
+
 import java.util.ArrayList;
 
 public class RankingActivity extends AppCompatActivity {
@@ -36,7 +41,7 @@ public class RankingActivity extends AppCompatActivity {
         });
     }
 
-    protected void setRanksAdapter() {
+    public void setRanksAdapter() {
         recyclerView = findViewById(R.id.playerRanksRecyclerView);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);

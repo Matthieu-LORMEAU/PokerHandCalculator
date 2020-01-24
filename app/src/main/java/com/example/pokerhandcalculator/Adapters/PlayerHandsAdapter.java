@@ -1,4 +1,4 @@
-package com.example.pokerhandcalculator;
+package com.example.pokerhandcalculator.Adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,6 +8,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.pokerhandcalculator.Model.Card;
+import com.example.pokerhandcalculator.Model.Player;
+import com.example.pokerhandcalculator.R;
+import com.example.pokerhandcalculator.Utils;
+
 import java.util.ArrayList;
 
 public class PlayerHandsAdapter extends ArrayAdapter<Player> {

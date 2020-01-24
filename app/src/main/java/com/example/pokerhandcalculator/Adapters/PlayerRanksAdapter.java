@@ -1,6 +1,7 @@
-package com.example.pokerhandcalculator;
+package com.example.pokerhandcalculator.Adapters;
 
 
+import android.media.Image;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,11 @@ import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.pokerhandcalculator.Model.BestFiveCards;
+import com.example.pokerhandcalculator.Model.Card;
+import com.example.pokerhandcalculator.Model.Player;
+import com.example.pokerhandcalculator.R;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -56,6 +62,25 @@ public class PlayerRanksAdapter extends RecyclerView.Adapter<PlayerRanksAdapter.
 
         Player currentPlayer = players.get(position);
 
+        ImageView ivCard1 = holder.playerCombinationLL.findViewById(R.id.card1ImageView);
+        ImageView ivCard2 = holder.playerCombinationLL.findViewById(R.id.card2ImageView);
+        ImageView ivCard3 = holder.playerCombinationLL.findViewById(R.id.card3ImageView);
+        ImageView ivCard4 = holder.playerCombinationLL.findViewById(R.id.card4ImageView);
+        ImageView ivCard5 = holder.playerCombinationLL.findViewById(R.id.card5ImageView);
+        ImageView[] ivCards = new ImageView[]{ivCard1, ivCard2, ivCard3, ivCard4, ivCard5};
+
+        holder.playerNameTV.setText(currentPlayer.getName());
+
+        if (currentPlayer.isFolded()) {
+            for (ImageView iv : ivCards) {
+                iv.setVisibility(View.GONE);
+            }
+            holder.comb1TV.setVisibility(View.GONE);
+            holder.comb2TV.setVisibility(View.GONE);
+            holder.playerRankTV.setText("Folded");
+            return;
+        }
+
         BestFiveCards bestFive = currentPlayer.getBestFive();
 
         int i = 0; // iterate over combinations
@@ -69,30 +94,10 @@ public class PlayerRanksAdapter extends RecyclerView.Adapter<PlayerRanksAdapter.
             }
 
             for (Card c : comb.second) {
-                ImageView iv = null;
-                switch (j) {
-                    case 0:
-                        iv = holder.playerCombinationLL.findViewById(R.id.card1ImageView);
-                        break;
-                    case 1:
-                        iv = holder.playerCombinationLL.findViewById(R.id.card2ImageView);
-                        break;
-                    case 2:
-                        iv = holder.playerCombinationLL.findViewById(R.id.card3ImageView);
-                        break;
-                    case 3:
-                        iv = holder.playerCombinationLL.findViewById(R.id.card4ImageView);
-                        break;
-                    case 4:
-                        iv = holder.playerCombinationLL.findViewById(R.id.card5ImageView);
-                        break;
-                     default: break;
-
-                }
                 String resName = c.getResourceName();
                 try {
                     Field idField = R.drawable.class.getDeclaredField(resName);
-                    iv.setImageResource(idField.getInt(idField));
+                    ivCards[j].setImageResource(idField.getInt(idField));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -117,18 +122,11 @@ public class PlayerRanksAdapter extends RecyclerView.Adapter<PlayerRanksAdapter.
             }
         }
 
-        holder.playerNameTV.setText(currentPlayer.getName());
         int rank = currentPlayer.getRank();
         String rankLabel = rank == 1 ? "Winner !" : "#"+rank;
         holder.playerRankTV.setText(rankLabel);
 
 
-
-//        holder.combTV.setText();
-//        holder.highestCardTV.setText();
-//        for (int i = 0; i < holder.playerCombinationLL.getChildCount(); i++) {
-//            ((ImageView) holder.playerCombinationLL.getChildAt(i)).setImageResource(R.drawable.);
-//        }
     }
 
     @Override

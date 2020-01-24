@@ -1,8 +1,4 @@
-package com.example.pokerhandcalculator;
-
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
+package com.example.pokerhandcalculator.Model;
 
 public class Player {
     private int id;
@@ -48,9 +44,7 @@ public class Player {
         return cards[0].toString() + " " + cards[1].toString();
     }
 
-    public void fold() {
-        folded = true;
-    }
+    public void fold() { folded = true; }
 
     public void unfold() {
         folded = false;

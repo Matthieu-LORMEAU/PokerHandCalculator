@@ -1,17 +1,12 @@
-package com.example.pokerhandcalculator;
+package com.example.pokerhandcalculator.Model;
 
 import android.os.Build;
 import android.util.Pair;
 
 import androidx.annotation.RequiresApi;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.List;
-
-import java.util.PriorityQueue;
-import java.util.Queue;
 
 public class BestFiveCards extends ArrayList<Pair<BestFiveCards.CombinationLabel, Card[]>> {
 

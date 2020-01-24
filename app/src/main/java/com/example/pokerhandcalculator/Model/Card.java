@@ -1,4 +1,4 @@
-package com.example.pokerhandcalculator;
+package com.example.pokerhandcalculator.Model;
 
 
 import android.widget.ImageView;
@@ -7,7 +7,7 @@ public class Card {
 
     public enum Face {Ace, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King}
 
-    enum Suit {Hearts, Spades, Diamonds, Clubs}
+    public enum Suit {Hearts, Spades, Diamonds, Clubs}
 
     private Face face;
     private Suit suit;
