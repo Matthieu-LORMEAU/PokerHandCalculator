@@ -2,6 +2,7 @@ package com.example.pokerhandcalculator.adapters;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.res.ResourcesCompat;
 
 import com.example.pokerhandcalculator.business.Card;
 import com.example.pokerhandcalculator.business.Round;
@@ -107,7 +109,8 @@ public class Utils {
                                     @Override
                                     public void onClick(View v) {
                                         face[0] = Card.Face.values()[faceIndex];
-                                        currentButton.getBackground().setColorFilter(Color.GREEN, PorterDuff.Mode.MULTIPLY);
+                                        int color = currentButton.getContext().getResources().getColor(R.color.colorPrimary);
+                                        currentButton.getBackground().setColorFilter(color, PorterDuff.Mode.MULTIPLY);
                                         for (int i = 0; i < ranksTableLayout.getChildCount(); i++) {
                                             TableRow row = (TableRow) ranksTableLayout.getChildAt(i);
                                             for (int j = 0; j < row.getChildCount(); j++) {
