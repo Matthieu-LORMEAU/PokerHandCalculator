@@ -1,4 +1,4 @@
-package com.example.pokerhandcalculator;
+package com.example.pokerhandcalculator.activities;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,10 +10,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.pokerhandcalculator.Adapters.PlayerRanksAdapter;
-import com.example.pokerhandcalculator.IO.ApiConsumer;
-import com.example.pokerhandcalculator.Model.Player;
-import com.example.pokerhandcalculator.Model.Round;
+import com.example.pokerhandcalculator.R;
+import com.example.pokerhandcalculator.adapters.PlayerRanksAdapter;
+import com.example.pokerhandcalculator.io.ApiConsumer;
+import com.example.pokerhandcalculator.business.Player;
+import com.example.pokerhandcalculator.business.Round;
 
 import java.util.ArrayList;
 
@@ -27,11 +28,14 @@ public class RankingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_ranking);
+
         ApiConsumer apiConsumer = new ApiConsumer();
         apiConsumer.callApi(this);
+
         Round.getInstance().sortPlayersByRanking();
-        //setRanksAdapter();
+
         Button newRoundButton = findViewById(R.id.backButton);
         newRoundButton.setOnClickListener(new View.OnClickListener() {
             @Override

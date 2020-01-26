@@ -1,4 +1,4 @@
-package com.example.pokerhandcalculator;
+package com.example.pokerhandcalculator.activities;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,24 +16,26 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 
-import com.example.pokerhandcalculator.Adapters.PlayerHandsAdapter;
-import com.example.pokerhandcalculator.IO.ApiConsumer;
-import com.example.pokerhandcalculator.Model.Card;
-import com.example.pokerhandcalculator.Model.Player;
-import com.example.pokerhandcalculator.Model.Round;
+import com.example.pokerhandcalculator.R;
+import com.example.pokerhandcalculator.adapters.PlayerHandsAdapter;
+import com.example.pokerhandcalculator.adapters.Utils;
+import com.example.pokerhandcalculator.io.ApiConsumer;
+import com.example.pokerhandcalculator.business.Card;
+import com.example.pokerhandcalculator.business.Player;
+import com.example.pokerhandcalculator.business.Round;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 
-public class MainActivity extends AppCompatActivity {
+public class GameActivity extends AppCompatActivity {
 
     ArrayList<Player> players = Round.getInstance().getPlayers();
     PlayerHandsAdapter adapter;
     int countPlayers = 0;
     ImageView[] comCardsImageViews;
     Button displayRankingButton;
+
+    AlertDialog.Builder errorDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +44,6 @@ public class MainActivity extends AppCompatActivity {
 
         new ApiConsumer().wakeUpServer(this);
 
-        for (int i = 0; i < 5; i++) {
-            Round.getInstance().setCommunityCard(i, new Card());
-        }
         System.out.println(Arrays.deepToString(Round.getInstance().getCommunityCards()));
         comCardsImageViews = new ImageView[]{(ImageView) findViewById(R.id.communityImage1),
                 (ImageView) findViewById(R.id.communityImage2),
@@ -52,33 +51,28 @@ public class MainActivity extends AppCompatActivity {
                 (ImageView) findViewById(R.id.communityImage4),
                 (ImageView) findViewById(R.id.communityImage5)};
 
+        errorDialog = new AlertDialog.Builder(this);
+        errorDialog.setPositiveButton("Ok", null);
+
         setHandsAdapter();
         setCommunityCardsListeners();
         setClearAllCardsListener();
+
         this.displayRankingButton = findViewById(R.id.findWinnerButton);
+
         final Intent intent = new Intent(this, RankingActivity.class);
+
         displayRankingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ArrayList<Player> players = Round.getInstance().getPlayers();
-                if (players.size() == 0) {
-                    AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
-                    alert.setTitle("No player in the game");
-                    alert.setMessage("Add some players first :)");
-                    alert.setPositiveButton("OK",null);
-                    alert.show();
+                if (Round.getInstance().hasPlayers() == false) {
+                    showError("No players in the game", "Please add at least one player");
                     return;
                 }
-                for (Player p : Round.getInstance().getPlayers()) {
-                    Card[] cards = p.getCards();
-                    if ((cards[0].getFace() == null || cards[1].getFace() == null) && !p.isFolded()){
-                        AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
-                        alert.setTitle("Incomplete hands !");
-                        alert.setMessage("Some players are missing cards or are not folded");
-                        alert.setPositiveButton("OK",null);
-                        alert.show();
-                        return;
-                    }
+                if (Round.getInstance().allNonFoldedPlayersHaveTwoCards() == false) {
+                    showError("Incomplete hands", "Some non folded players are missing cards");
+                    return;
                 }
                 startActivity(intent);
             }
@@ -91,7 +85,6 @@ public class MainActivity extends AppCompatActivity {
         ViewCompat.setNestedScrollingEnabled(phgv, true);
         adapter = new PlayerHandsAdapter(this, R.layout.player_hand_item, players);
         phgv.setAdapter(adapter);
-        Round.getInstance().setAdapter(adapter);
         Button addPlayer = findViewById(R.id.addPlayerButton);
         addPlayer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,22 +107,12 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 String nameInput = input.getText().toString();
                 if (nameInput.isEmpty()) {
-                    AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
-                    alert.setTitle("Your name is empty");
-                    alert.setMessage("Please set a non empty name");
-                    alert.setPositiveButton("OK",null);
-                    alert.show();
+                    showError("Name is empty", "Please set a non empty name");
                     return;
                 }
-                for (Player p : Round.getInstance().getPlayers()) {
-                    if (p.getName().toLowerCase().equals(nameInput.toLowerCase())) {
-                        AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
-                        alert.setTitle("Another player has this name");
-                        alert.setMessage("Please set another name");
-                        alert.setPositiveButton("OK",null);
-                        alert.show();
-                        return;
-                    }
+                else if (Round.getInstance().nameIsAlreadyTaken(nameInput)) {
+                    showError("Another player has this name", "Please set another name");
+                    return;
                 }
                 players.add(new Player(countPlayers++, nameInput.toString()));
                 final GridView phgv = findViewById(R.id.playerHandsGridView);
@@ -168,10 +151,15 @@ public class MainActivity extends AppCompatActivity {
                         c.setFace(null);
                     }
                 }
-                Round.getInstance().setUsedCards(new boolean[4][13]);
                 adapter.notifyDataSetChanged();
             }
         });
+    }
+
+    protected  void showError(String title, String message) {
+        errorDialog.setTitle(title);
+        errorDialog.setMessage(message);
+        errorDialog.show();
     }
 
 }

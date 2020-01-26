@@ -1,4 +1,4 @@
-package com.example.pokerhandcalculator.Adapters;
+package com.example.pokerhandcalculator.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,10 +9,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.pokerhandcalculator.Model.Card;
-import com.example.pokerhandcalculator.Model.Player;
+import com.example.pokerhandcalculator.business.Card;
+import com.example.pokerhandcalculator.business.Player;
 import com.example.pokerhandcalculator.R;
-import com.example.pokerhandcalculator.Utils;
 
 import java.util.ArrayList;
 
@@ -47,7 +46,6 @@ public class PlayerHandsAdapter extends ArrayAdapter<Player> {
             removePlayerButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    player.addOrRemovePlayerCardsToUsedCards(false);
                     players.remove(player);
                     notifyDataSetChanged();
                 }
@@ -100,14 +98,12 @@ public class PlayerHandsAdapter extends ArrayAdapter<Player> {
                         foldedTextView.setVisibility(TextView.VISIBLE);
                         iv1.setVisibility(ImageView.GONE);
                         iv2.setVisibility(ImageView.GONE);
-                        player.addOrRemovePlayerCardsToUsedCards(false);
                         player.fold();
                     } else {
                         foldButton.setText("Fold");
                         foldedTextView.setVisibility(TextView.GONE);
                         iv1.setVisibility(ImageView.VISIBLE);
                         iv2.setVisibility(ImageView.VISIBLE);
-                        player.addOrRemovePlayerCardsToUsedCards(true);
                         player.unfold();
                     }
                 }

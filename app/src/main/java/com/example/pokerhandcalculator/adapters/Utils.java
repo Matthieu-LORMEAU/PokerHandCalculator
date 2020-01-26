@@ -1,4 +1,4 @@
-package com.example.pokerhandcalculator;
+package com.example.pokerhandcalculator.adapters;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -14,8 +14,9 @@ import android.widget.TableRow;
 
 import androidx.appcompat.app.AlertDialog;
 
-import com.example.pokerhandcalculator.Model.Card;
-import com.example.pokerhandcalculator.Model.Round;
+import com.example.pokerhandcalculator.business.Card;
+import com.example.pokerhandcalculator.business.Round;
+import com.example.pokerhandcalculator.R;
 
 public class Utils {
 
@@ -70,12 +71,8 @@ public class Utils {
                         public void onClick(DialogInterface dialog, int which) {
                             if (face[0] != null && suit[0] != null) {
 
-                                Round.getInstance().setUsedOrUnusedCard(suit[0].ordinal(), face[0].ordinal(), true);
                                 Card.Suit previousSuit = card.getSuit();
                                 Card.Face previousFace = card.getFace();
-                                if (previousFace != null && previousSuit != null) {
-                                    Round.getInstance().setUsedOrUnusedCard(previousSuit.ordinal(), previousFace.ordinal(), false);
-                                }
                                 card.setFace(face[0]);
                                 card.setSuit(suit[0]);
                                 String resName = card.getResourceName();
@@ -132,7 +129,7 @@ public class Utils {
         }
     }
 
-    public static boolean containsBoolean(boolean[] array, boolean bool) {
+    private static boolean containsBoolean(boolean[] array, boolean bool) {
         for (boolean b : array) {
             if (b == bool) {
                 return true;

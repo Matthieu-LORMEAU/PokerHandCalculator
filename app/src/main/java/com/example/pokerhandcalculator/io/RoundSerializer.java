@@ -1,11 +1,11 @@
-package com.example.pokerhandcalculator.IO;
+package com.example.pokerhandcalculator.io;
 
 import android.util.Log;
 
-import com.example.pokerhandcalculator.Model.Card;
-import com.example.pokerhandcalculator.Model.NullCardException;
-import com.example.pokerhandcalculator.Model.Player;
-import com.example.pokerhandcalculator.Model.Round;
+import com.example.pokerhandcalculator.business.Card;
+import com.example.pokerhandcalculator.business.NullCardException;
+import com.example.pokerhandcalculator.business.Player;
+import com.example.pokerhandcalculator.business.Round;
 
 import org.json.JSONArray;
 import org.json.JSONException;

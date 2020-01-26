@@ -1,7 +1,5 @@
-package com.example.pokerhandcalculator.Model;
+package com.example.pokerhandcalculator.business;
 
-
-import android.widget.ImageView;
 
 public class Card {
 

@@ -1,7 +1,6 @@
-package com.example.pokerhandcalculator.Adapters;
+package com.example.pokerhandcalculator.adapters;
 
 
-import android.media.Image;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,9 +12,9 @@ import android.widget.TextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.pokerhandcalculator.Model.BestFiveCards;
-import com.example.pokerhandcalculator.Model.Card;
-import com.example.pokerhandcalculator.Model.Player;
+import com.example.pokerhandcalculator.business.BestFiveCards;
+import com.example.pokerhandcalculator.business.Card;
+import com.example.pokerhandcalculator.business.Player;
 import com.example.pokerhandcalculator.R;
 
 import java.lang.reflect.Field;

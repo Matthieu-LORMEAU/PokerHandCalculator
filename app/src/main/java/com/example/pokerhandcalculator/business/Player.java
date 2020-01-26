@@ -1,4 +1,4 @@
-package com.example.pokerhandcalculator.Model;
+package com.example.pokerhandcalculator.business;
 
 public class Player {
     private int id;
@@ -46,19 +46,10 @@ public class Player {
 
     public void fold() { folded = true; }
 
-    public void unfold() {
-        folded = false;
-    }
+    public void unfold() { folded = false; }
 
     public boolean isFolded() {
         return folded;
-    }
-
-    public void addOrRemovePlayerCardsToUsedCards(boolean add) throws java.lang.NullPointerException {
-        for (Card c : this.cards) {
-            if (c.getSuit() != null && c.getFace() != null)
-                Round.getInstance().setUsedOrUnusedCard(c.getSuit().ordinal(), c.getFace().ordinal(), add);
-        }
     }
 
     public BestFiveCards getBestFive() {

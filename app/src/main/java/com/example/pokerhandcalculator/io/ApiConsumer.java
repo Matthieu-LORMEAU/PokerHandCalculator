@@ -1,4 +1,4 @@
-package com.example.pokerhandcalculator.IO;
+package com.example.pokerhandcalculator.io;
 
 import android.app.ProgressDialog;
 import android.os.Build;
@@ -16,11 +16,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.pokerhandcalculator.MainActivity;
-import com.example.pokerhandcalculator.Model.NullCardException;
-import com.example.pokerhandcalculator.Model.Player;
-import com.example.pokerhandcalculator.Model.Round;
-import com.example.pokerhandcalculator.RankingActivity;
+import com.example.pokerhandcalculator.activities.GameActivity;
+import com.example.pokerhandcalculator.business.NullCardException;
+import com.example.pokerhandcalculator.business.Round;
+import com.example.pokerhandcalculator.activities.RankingActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,7 +31,7 @@ public class ApiConsumer {
     // notre API est sur Heroku et "s'endort" au bout de 30 min d'inactivité,
     // ce qui fait que la premiere requete met du temps a aboutir, donc on envoie
     // une requete au lancement e lappli pour reveiller le serveur
-    public void wakeUpServer(final MainActivity context) {
+    public void wakeUpServer(final GameActivity context) {
         Volley.newRequestQueue(context)
                 .add(
                         new StringRequest(

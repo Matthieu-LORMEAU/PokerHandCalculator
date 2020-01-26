@@ -1,4 +1,4 @@
-package com.example.pokerhandcalculator.Model;
+package com.example.pokerhandcalculator.business;
 
 import android.os.Build;
 import android.util.Pair;
@@ -36,23 +36,8 @@ public class BestFiveCards extends ArrayList<Pair<BestFiveCards.CombinationLabel
         super();
     }
 
-    public void addCombination(CombinationLabel label, Card[] cards) {
-        this.add(new Pair<CombinationLabel, Card[]>(label, cards));
-    }
-
     public void addCombination(Pair<CombinationLabel, Card[]> combination) {
         this.add(combination);
-    }
-
-
-    @RequiresApi(api = Build.VERSION_CODES.N)
-    public void sortByCombinationValue() {
-        this.sort(new Comparator<Pair<CombinationLabel, Card[]>>() {
-            @Override
-            public int compare(Pair<CombinationLabel, Card[]> pairA, Pair<CombinationLabel, Card[]> pairB) {
-                return pairA.first.value - pairB.first.value;
-            }
-        });
     }
 
 }
